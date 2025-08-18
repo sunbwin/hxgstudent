@@ -16,7 +16,7 @@ const active = ref('home');
   <div>
     <main>
       <router-view v-slot="{ Component }">
-        <keep-alive include="home,plan,profile">
+        <keep-alive include="home,plan,pointsmall,profile">
           <component :is="Component" :key="route.name" />
         </keep-alive>
       </router-view>
@@ -25,6 +25,7 @@ const active = ref('home');
     <van-tabbar v-model="active" route fixed>
       <van-tabbar-item name="home" icon="home-o" replace to="/home">首页</van-tabbar-item>
       <van-tabbar-item name="plan" icon="home-o" replace to="/plan">课表</van-tabbar-item>
+      <van-tabbar-item name="pointsmall" icon="home-o" replace to="/pointsmall">积分</van-tabbar-item>
       <van-tabbar-item name="profile" icon="setting-o" replace to="/profile">我的</van-tabbar-item>
     </van-tabbar>
   </div>

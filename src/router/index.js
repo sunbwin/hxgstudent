@@ -12,6 +12,7 @@ import EditProfile from "@/views/EditProfile.vue";
 import Investigation from "@/views/Investigation.vue";
 import Trial from "@/views/Trial.vue";
 import ClassHour from "@/views/ClassHour.vue";
+import PointsMall from "@/views/tabs/PointsMall.vue";
 
 const routes = [
     {
@@ -39,6 +40,15 @@ const routes = [
                 component: Plan,
                 meta: {
                     title: '课表',
+                    keepAlive: true // 这个标记很重要，在 Main.vue 的 keep-alive 中使用
+                }
+            },
+            {
+                path: 'pointsmall',
+                name: 'pointsmall',
+                component: PointsMall,
+                meta: {
+                    title: '积分商城',
                     keepAlive: true // 这个标记很重要，在 Main.vue 的 keep-alive 中使用
                 }
             },
