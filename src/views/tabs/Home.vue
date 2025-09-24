@@ -81,6 +81,10 @@ onMounted(() => {
 const pullRefreshRef = ref(null);
 let savedScrollTop = 0;
 
+onMounted(() => {
+  debugger
+});
+
 onBeforeRouteLeave(() => {
   const vanPullRefreshElement = document.querySelector('.van-pull-refresh');
   if (vanPullRefreshElement) {
@@ -90,6 +94,7 @@ onBeforeRouteLeave(() => {
 });
 
 onActivated(() => {
+  debugger
   console.log('HomeonActivated savedScrollTop == ', savedScrollTop);
   const vanPullRefreshElement = document.querySelector('.van-pull-refresh');
   if (savedScrollTop > 0 && vanPullRefreshElement) {

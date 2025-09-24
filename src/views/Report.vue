@@ -116,20 +116,19 @@
 </template>
 
 <script setup>
-import {onMounted, ref, watch, nextTick} from 'vue';
-import {useRouter} from 'vue-router';
-import {NavBar, Calendar, showToast} from 'vant';
+import {onMounted, ref, watch, nextTick, onBeforeUnmount, defineOptions} from 'vue';
+import { useRouter } from 'vue-router';
+import { Calendar, showToast } from 'vant';
 import * as echarts from 'echarts';
 
-// 在 setup 函数中获取路由实例
+defineOptions({
+  name: 'report',
+});
+
+let chartInstances = {};
+
 const router = useRouter();
 
-// 导航栏返回
-const onClickLeft = () => {
-  window.history.back();
-};
-
-// 封面页状态控制
 const showCover = ref(true);
 const isSliding = ref(false);
 
@@ -137,81 +136,57 @@ const startReport = () => {
   isSliding.value = true;
   setTimeout(() => {
     showCover.value = false;
-  }, 500); // 匹配 CSS 动画时长
+  }, 500);
 };
 
-// 新增：处理页面跳转并传递参数
-const goToAttachPage = (param) => {
+const goToAttachPage = () => {
   router.push({
     name: 'introduce'
   });
 };
 
-// 1. 柱状图数据和配置
 const chartData = {
   labels: ['理解', '掌握'],
   series: [
     {
       name: '体验课-正课',
-      data: [10, 10],
+      data: [5, 5],
     },
     {
       name: '体验课-精英课1',
-      data: [10, 10],
+      data: [7, 6],
     },
     {
       name: '体验课-精英课2',
-      data: [10, 10],
-    },
-  ],
+      data: [9, 7],
+    }
+  ]
 };
 
 const chartData2 = {
-  labels: ['行为习惯', '逻辑思维','批判性思维', '沟通表达','持续改进'],
+  labels: ['行为习惯', '逻辑思维', '批判性思维', '沟通表达', '持续改进'],
   series: [
-    {
-      name: '体验课-正课',
-      data: [4, 5, 6,4,1],
-    },
-    {
-      name: '体验课-精英课1',
-      data: [4, 5, 6,5,2],
-    },
-    {
-      name: '体验课-精英课2',
-      data: [4, 5, 7,6,3],
-},
-],
+    { name: '体验课-正课', data: [4, 5, 6, 4, 1] },
+    { name: '体验课-精英课1', data: [4, 5, 6, 5, 2] },
+    { name: '体验课-精英课2', data: [4, 5, 7, 6, 3] },
+  ],
 };
 
 const initChart = (id, data) => {
-  // 在初始化图表前，再次检查 DOM 元素是否存在
   const chartDom = document.getElementById(id);
   if (chartDom) {
+    if (chartInstances[id]) { chartInstances[id].dispose(); }
     const myChart = echarts.init(chartDom);
+    chartInstances[id] = myChart;
     const option = {
-      tooltip: {
-        trigger: 'axis',
-        axisPointer: {type: 'shadow'}
-      },
-      legend: {
-        data: data.series.map(s => s.name),
-        top: 'top',
-      },
+      tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+      legend: { data: data.series.map(s => s.name), top: 'top' },
       xAxis: {
         type: 'category',
         data: data.labels,
-        axisLabel: {
-          rotate: 60,
-          interval: 0
-        }
+        axisLabel: { rotate: 60, interval: 0 }
       },
-      yAxis: {
-        type: 'value',
-        min: 0,
-        max: 10,
-        interval: 1
-      },
+      yAxis: { type: 'value', min: 0, max: 10, interval: 1 },
       series: data.series.map(s => ({
         name: s.name,
         type: 'bar',
@@ -223,72 +198,31 @@ const initChart = (id, data) => {
   }
 };
 
-// 新增：核心评估分数图表数据
-const scoreChartData1 = {
-  score: 35,
-  categories: [
-    { name: '奠基·起步区', scoreRange: [0, 49] },
-    { name: '形成·潜力区', scoreRange: [50, 69] },
-    { name: '巩固·优秀区', scoreRange: [70, 89] },
-    { name: '自动化·学霸区', scoreRange: [90, 100] }
-  ]
-};
+const scoreChartData1 = { score: 35, categories: [{ name: '奠基·起步区', scoreRange: [0, 49] }, { name: '形成·潜力区', scoreRange: [50, 69] }, { name: '巩固·优秀区', scoreRange: [70, 89] }, { name: '自动化·学霸区', scoreRange: [90, 100] }] };
+const scoreChartData2 = { score: 40, categories: [{ name: '依赖提醒型', scoreRange: [0, 49] }, { name: '时常波动型', scoreRange: [50, 69] }, { name: '主动坚持型', scoreRange: [70, 89] }, { name: '高度自律型', scoreRange: [90, 100] }] };
+const scoreChartData3 = { score: 33, categories: [{ name: '浅层模仿型', scoreRange: [0, 49] }, { name: '方法摸索型', scoreRange: [50, 69] }, { name: '熟练掌握型', scoreRange: [70, 89] }, { name: '迁移创新型', scoreRange: [90, 100] }] };
 
-const scoreChartData2 = {
-  score: 40,
-  categories: [
-    { name: '依赖提醒型', scoreRange: [0, 49] },
-    { name: '时常波动型', scoreRange: [50, 69] },
-    { name: '主动坚持型', scoreRange: [70, 89] },
-    { name: '高度自律型', scoreRange: [90, 100] }
-  ]
-};
-
-const scoreChartData3 = {
-  score: 33,
-  categories: [
-    { name: '浅层模仿型', scoreRange: [0, 49] },
-    { name: '方法摸索型', scoreRange: [50, 69] },
-    { name: '熟练掌握型', scoreRange: [70, 89] },
-    { name: '迁移创新型', scoreRange: [90, 100] }
-  ]
-};
-
-// 新增：初始化核心评估分数分组柱状图
 const initScoreChart = (id, data) => {
   const chartDom = document.getElementById(id);
   if (chartDom) {
+    if (chartInstances[id]) { chartInstances[id].dispose(); }
     const myChart = echarts.init(chartDom);
+    chartInstances[id] = myChart;
     const studentCategory = data.categories.find(c => data.score >= c.scoreRange[0] && data.score <= c.scoreRange[1]);
-
     const option = {
-      tooltip: {
-        trigger: 'axis',
-        axisPointer: { type: 'shadow' }
-      },
-      grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-      },
+      tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+      grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
       xAxis: {
         type: 'category',
         data: data.categories.map(c => c.name),
-        axisLabel: {
-          interval: 0,
-          rotate: 0,
-          fontSize: 12,
-        }
+        axisLabel: { interval: 0, rotate: 0, fontSize: 12 }
       },
       yAxis: {
         type: 'value',
         name: '分数',
         min: 0,
         max: 100,
-        axisLabel: {
-          formatter: '{value}'
-        }
+        axisLabel: { formatter: '{value}' }
       },
       series: [
         {
@@ -298,10 +232,8 @@ const initScoreChart = (id, data) => {
           data: data.categories.map(c => {
             const isStudentCategory = c.name === studentCategory.name;
             return {
-              value: isStudentCategory ? data.score : c.scoreRange[1] - (c.scoreRange[1] - c.scoreRange[0]) / 2, // 使用中间值作为非学生类别的柱高
-              itemStyle: {
-                color: isStudentCategory ? '#967BB6' : '#d3d3d3'
-              },
+              value: isStudentCategory ? data.score : c.scoreRange[1] - (c.scoreRange[1] - c.scoreRange[0]) / 2,
+              itemStyle: { color: isStudentCategory ? '#967BB6' : '#d3d3d3' },
               label: {
                 show: isStudentCategory,
                 position: 'top',
@@ -318,11 +250,12 @@ const initScoreChart = (id, data) => {
   }
 };
 
-// 新增：初始化象限图
 const initQuadrantChart = (id, studentFrequency, studentDepth) => {
   const chartDom = document.getElementById(id);
   if (chartDom) {
+    if (chartInstances[id]) { chartInstances[id].dispose(); }
     const myChart = echarts.init(chartDom);
+    chartInstances[id] = myChart;
     const option = {
       tooltip: {
         formatter: function(params) {
@@ -336,21 +269,10 @@ const initQuadrantChart = (id, studentFrequency, studentDepth) => {
         type: 'value',
         min: 0,
         max: 100,
-        axisLabel: {
-          formatter: '{value}',
-          fontSize: 12
-        },
-        splitLine: {
-          show: false
-        },
-        axisTick: {
-          show: false
-        },
-        axisLine: {
-          lineStyle: {
-            color: '#666'
-          }
-        },
+        axisLabel: { formatter: '{value}', fontSize: 12 },
+        splitLine: { show: false },
+        axisTick: { show: false },
+        axisLine: { lineStyle: { color: '#666' } },
         name: '频率（坚持度）',
         nameLocation: 'middle',
         nameGap: 30
@@ -359,21 +281,10 @@ const initQuadrantChart = (id, studentFrequency, studentDepth) => {
         type: 'value',
         min: 0,
         max: 100,
-        axisLabel: {
-          formatter: '{value}',
-          fontSize: 12
-        },
-        splitLine: {
-          show: false
-        },
-        axisTick: {
-          show: false
-        },
-        axisLine: {
-          lineStyle: {
-            color: '#666'
-          }
-        },
+        axisLabel: { formatter: '{value}', fontSize: 12 },
+        splitLine: { show: false },
+        axisTick: { show: false },
+        axisLine: { lineStyle: { color: '#666' } },
         name: '深度（思考力）',
         nameLocation: 'middle',
         nameGap: 30
@@ -384,14 +295,8 @@ const initQuadrantChart = (id, studentFrequency, studentDepth) => {
           type: 'scatter',
           symbolSize: 20,
           data: [[studentFrequency, studentDepth]],
-          itemStyle: {
-            color: '#967BB6'
-          },
-          label: {
-            show: true,
-            position: 'top',
-            formatter: '林晨同学'
-          },
+          itemStyle: { color: '#967BB6' },
+          label: { show: true, position: 'top', formatter: '林晨同学' },
           z: 2
         },
         {
@@ -400,102 +305,42 @@ const initQuadrantChart = (id, studentFrequency, studentDepth) => {
           markLine: {
             silent: true,
             data: [
-              {xAxis: 50, lineStyle: {color: '#888', type: 'dashed'}},
-              {yAxis: 50, lineStyle: {color: '#888', type: 'dashed'}}
+              { xAxis: 50, lineStyle: { color: '#888', type: 'dashed' } },
+              { yAxis: 50, lineStyle: { color: '#888', type: 'dashed' } }
             ]
           },
           z: 1
         }
       ],
       graphic: [
-        {
-          type: 'text',
-          left: '20%',
-          top: '25%',
-          style: {
-            text: '低频率 + 高深度\n(小聪明，动力不足型)',
-            fill: '#555',
-            font: '10px sans-serif',
-            textAlign: 'center'
-          }
-        },
-        {
-          type: 'text',
-          left: '55%',
-          top: '25%',
-          style: {
-            text: '高频率 + 高深度\n(高度自驱，学霸潜质型)',
-            fill: '#555',
-            font: '10px sans-serif',
-            textAlign: 'center'
-          }
-        },
-        {
-          type: 'text',
-          left: '20%',
-          top: '65%',
-          style: {
-            text: '低频率 + 低深度\n(信心不足，亟待扶持型)',
-            fill: '#555',
-            font: '10px sans-serif',
-            textAlign: 'center'
-          }
-        },
-        {
-          type: 'text',
-          left: '55%',
-          top: '65%',
-          style: {
-            text: '高频率 + 低深度\n(伪勤奋，事倍功半型)',
-            fill: '#555',
-            font: '10px sans-serif',
-            textAlign: 'center'
-          }
-        }
+        { type: 'text', left: '20%', top: '25%', style: { text: '低频率 + 高深度\n(小聪明，动力不足型)', fill: '#555', font: '10px sans-serif', textAlign: 'center' } },
+        { type: 'text', left: '55%', top: '25%', style: { text: '高频率 + 高深度\n(高度自驱，学霸潜质型)', fill: '#555', font: '10px sans-serif', textAlign: 'center' } },
+        { type: 'text', left: '20%', top: '65%', style: { text: '低频率 + 低深度\n(信心不足，亟待扶持型)', fill: '#555', font: '10px sans-serif', textAlign: 'center' } },
+        { type: 'text', left: '55%', top: '65%', style: { text: '高频率 + 低深度\n(伪勤奋，事倍功半型)', fill: '#555', font: '10px sans-serif', textAlign: 'center' } }
       ]
     };
     myChart.setOption(option);
   }
 };
 
-// 新增：预期变化柱状图数据
 const progressChartData = {
   labels: ['学习习惯总分', '频率分 (坚持度)', '深度分 (思考力)'],
   series: [
-    {
-      name: '当前评估',
-      data: [35, 40, 33],
-    },
-    {
-      name: '一学期后预期',
-      data: [68, 73, 65],
-    }
+    { name: '当前评估', data: [35, 40, 33] },
+    { name: '一学期后预期', data: [68, 73, 65] }
   ]
 };
 
-// 新增：初始化预期变化柱状图
 const initProgressChart = (id, data) => {
   const chartDom = document.getElementById(id);
   if (chartDom) {
+    if (chartInstances[id]) { chartInstances[id].dispose(); }
     const myChart = echarts.init(chartDom);
+    chartInstances[id] = myChart;
     const option = {
-      tooltip: {
-        trigger: 'axis',
-        axisPointer: { type: 'shadow' }
-      },
-      legend: {
-        data: data.series.map(s => s.name),
-        top: 'top',
-        textStyle: {
-          fontSize: 14,
-        }
-      },
-      grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-      },
+      tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+      legend: { data: data.series.map(s => s.name), top: 'top', textStyle: { fontSize: 14 } },
+      grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
       xAxis: {
         type: 'category',
         data: data.labels,
@@ -504,10 +349,7 @@ const initProgressChart = (id, data) => {
           rotate: 0,
           fontSize: 14,
           formatter: function (value) {
-            // 格式化标签以适应小屏幕
-            if (value.length > 5) {
-              return value.replace(' ', '\n');
-            }
+            if (value.length > 5) { return value.replace(' ', '\n'); }
             return value;
           }
         }
@@ -517,9 +359,7 @@ const initProgressChart = (id, data) => {
         name: '分数',
         min: 0,
         max: 100,
-        axisLabel: {
-          formatter: '{value}'
-        }
+        axisLabel: { formatter: '{value}' }
       },
       series: data.series.map(s => ({
         name: s.name,
@@ -527,61 +367,52 @@ const initProgressChart = (id, data) => {
         barWidth: '30%',
         data: s.data.map(val => ({
           value: val,
-          label: {
-            show: true,
-            position: 'top',
-            formatter: '{c}',
-            color: '#666'
-          }
+          label: { show: true, position: 'top', formatter: '{c}', color: '#666' }
         })),
-        itemStyle: {
-          color: s.name === '当前评估' ? '#967BB6':'#6B4A8E'
-        }
+        itemStyle: { color: s.name === '当前评估' ? '#967BB6' : '#6B4A8E' }
       }))
     };
     myChart.setOption(option);
   }
 };
 
-// 3. 课程日历数据
 const minDate = new Date(2025, 8, 1);
 const maxDate = new Date(2025, 11, 31);
 const defaultDate = new Date(2025, 8, 1);
 
-// 课程数据
 const courses = [
-  {date: new Date(2025, 8, 2), name: '每日三反思-正课'},
-  {date: new Date(2025, 8, 4), name: '每日三反思-精英课'},
-  {date: new Date(2025, 8, 8), name: '每日三反思-精英课'},
-  {date: new Date(2025, 8, 11), name: '每日三反思-精英课'},
-  {date: new Date(2025, 8, 13), name: '精英课2'},
-  {date: new Date(2025, 8, 18), name: '正课'},
-  {date: new Date(2025, 8, 20), name: '精英课1'},
-  {date: new Date(2025, 8, 22), name: '精英课2'},
-  {date: new Date(2025, 9, 2), name: '每日三反思-正课'},
-  {date: new Date(2025, 9, 4), name: '每日三反思-精英课'},
-  {date: new Date(2025, 9, 8), name: '每日三反思-精英课'},
-  {date: new Date(2025, 9, 11), name: '每日三反思-精英课'},
-  {date: new Date(2025, 9, 13), name: '精英课2'},
-  {date: new Date(2025, 9, 18), name: '正课'},
-  {date: new Date(2025, 9, 20), name: '精英课1'},
-  {date: new Date(2025, 9, 22), name: '精英课2'},
-  {date: new Date(2025, 10, 8), name: '每日三反思-正课'},
-  {date: new Date(2025, 10, 10), name: '每日三反思-精英课'},
-  {date: new Date(2025, 10, 12), name: '每日三反思-精英课'},
-  {date: new Date(2025, 10, 14), name: '每日三反思-精英课'},
-  {date: new Date(2025, 10, 16), name: '精英课2'},
-  {date: new Date(2025, 10, 18), name: '正课'},
-  {date: new Date(2025, 10, 20), name: '精英课1'},
-  {date: new Date(2025, 10, 22), name: '精英课2'},
-  {date: new Date(2025, 11, 8), name: '每日三反思-正课'},
-  {date: new Date(2025, 11, 10), name: '每日三反思-精英课'},
-  {date: new Date(2025, 11, 12), name: '每日三反思-精英课'},
-  {date: new Date(2025, 11, 14), name: '每日三反思-精英课'},
-  {date: new Date(2025, 11, 16), name: '精英课2'},
-  {date: new Date(2025, 11, 18), name: '正课'},
-  {date: new Date(2025, 11, 20), name: '精英课1'},
-  {date: new Date(2025, 11, 22), name: '精英课2'},
+  { date: new Date(2025, 8, 2), name: '每日三反思-正课' },
+  { date: new Date(2025, 8, 4), name: '每日三反思-精英课' },
+  { date: new Date(2025, 8, 8), name: '每日三反思-精英课' },
+  { date: new Date(2025, 8, 11), name: '每日三反思-精英课' },
+  { date: new Date(2025, 8, 13), name: '精英课2' },
+  { date: new Date(2025, 8, 18), name: '正课' },
+  { date: new Date(2025, 8, 20), name: '精英课1' },
+  { date: new Date(2025, 8, 22), name: '精英课2' },
+  { date: new Date(2025, 9, 2), name: '每日三反思-正课' },
+  { date: new Date(2025, 9, 4), name: '每日三反思-精英课' },
+  { date: new Date(2025, 9, 8), name: '每日三反思-精英课' },
+  { date: new Date(2025, 9, 11), name: '每日三反思-精英课' },
+  { date: new Date(2025, 9, 13), name: '精英课2' },
+  { date: new Date(2025, 9, 18), name: '正课' },
+  { date: new Date(2025, 9, 20), name: '精英课1' },
+  { date: new Date(2025, 9, 22), name: '精英课2' },
+  { date: new Date(2025, 10, 8), name: '每日三反思-正课' },
+  { date: new Date(2025, 10, 10), name: '每日三反思-精英课' },
+  { date: new Date(2025, 10, 12), name: '每日三反思-精英课' },
+  { date: new Date(2025, 10, 14), name: '每日三反思-精英课' },
+  { date: new Date(2025, 10, 16), name: '精英课2' },
+  { date: new Date(2025, 10, 18), name: '正课' },
+  { date: new Date(2025, 10, 20), name: '精英课1' },
+  { date: new Date(2025, 10, 22), name: '精英课2' },
+  { date: new Date(2025, 11, 8), name: '每日三反思-正课' },
+  { date: new Date(2025, 11, 10), name: '每日三反思-精英课' },
+  { date: new Date(2025, 11, 12), name: '每日三反思-精英课' },
+  { date: new Date(2025, 11, 14), name: '每日三反思-精英课' },
+  { date: new Date(2025, 11, 16), name: '精英课2' },
+  { date: new Date(2025, 11, 18), name: '正课' },
+  { date: new Date(2025, 11, 20), name: '精英课1' },
+  { date: new Date(2025, 11, 22), name: '精英课2' },
 ];
 
 const courseMap = courses.reduce((acc, curr) => {
@@ -589,7 +420,6 @@ const courseMap = courses.reduce((acc, curr) => {
   return acc;
 }, {});
 
-// 日期点击事件处理函数
 const onDateSelect = (date) => {
   const courseName = courseMap[date.toDateString()];
   if (courseName) {
@@ -601,26 +431,41 @@ const onDateSelect = (date) => {
   }
 };
 
-// 监听 showCover 变量的变化
 watch(showCover, (newValue) => {
-  // 当 newValue 变为 false 时，表示封面页已隐藏
   if (newValue === false) {
-    // 使用 nextTick 确保 DOM 已经更新，然后初始化图表
     nextTick(() => {
       initChart('chart-container', chartData);
       initChart('chart-container-2', chartData2);
-      // 初始化新增的三个分数图表
       initScoreChart('chart-health', scoreChartData1);
       initScoreChart('chart-persistence', scoreChartData2);
-      // 注意：这里没有 chart-thinking，因为它没有独立的图表，只有描述
       initScoreChart('chart-thinking', scoreChartData3);
-      // 初始化象限图
       initQuadrantChart('chart-quadrant', 40, 33);
-      // 初始化新增的预期变化柱状图
       initProgressChart('chart-expected-progress', progressChartData);
     });
   }
 });
+
+onBeforeUnmount(() => {
+  for (const id in chartInstances) {
+    if (chartInstances[id] && !chartInstances[id].isDisposed()) {
+      chartInstances[id].dispose();
+    }
+  }
+});
+</script>
+
+<script>
+export default {
+  beforeRouteEnter(to, from, next) {
+    if (from.name === 'introduce') {
+      next(vm => {
+        vm.showCover = false;
+      });
+    } else {
+      next();
+    }
+  }
+};
 </script>
 
 <style scoped>
@@ -713,18 +558,15 @@ watch(showCover, (newValue) => {
   margin-bottom: 1.6rem;
 }
 
-/* 视频样式 */
 .report-video {
   width: 100%;
   border-radius: 0.8rem;
 }
 
-/* 课程日历样式 */
 .calendar-wrapper {
   padding: 1.6rem 0;
 }
 
-/* 确保每个日期单元格有足够的空间容纳多行文本，并保持日期不被遮挡 */
 :deep(.van-calendar__day) {
   min-height: 6rem;
   padding-top: 1.5rem;
@@ -736,10 +578,9 @@ watch(showCover, (newValue) => {
 }
 
 :deep(.van-calendar__day .van-calendar__text) {
-  margin-bottom: 0.5rem; /* 在日期和课程名称之间增加间距 */
+  margin-bottom: 0.5rem;
 }
 
-/* 课程名称标签样式 */
 .course-name-tag {
   font-size: 1rem;
   color: #fff;
@@ -748,14 +589,13 @@ watch(showCover, (newValue) => {
   padding: 0.2rem 0.4rem;
   display: block;
   width: 90%;
-  white-space: nowrap; /* 不换行 */
-  overflow: hidden; /* 隐藏超出部分 */
-  text-overflow: ellipsis; /* 显示省略号 */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   text-align: center;
   line-height: 1.2;
 }
 
-/* 教练介绍模块样式 */
 .coach-card {
   text-align: center;
 }
@@ -796,7 +636,6 @@ watch(showCover, (newValue) => {
   text-align: left;
 }
 
-/* 底部超链接样式 */
 .link-container {
   display: flex;
   flex-direction: column;

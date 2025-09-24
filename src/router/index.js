@@ -102,7 +102,10 @@ const routes = [
     {
         path: '/report',
         name: 'report',
-        component: Report
+        component: Report,
+        meta: {
+            keepAlive: true
+        }
     },
     {
         path: '/attach',

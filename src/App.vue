@@ -5,7 +5,7 @@
 <template>
   <main >
     <router-view v-slot="{ Component }">
-      <keep-alive include="main">
+      <keep-alive include="main,report">
         <component :is="Component" />
       </keep-alive>
     </router-view>
