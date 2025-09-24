@@ -13,6 +13,9 @@ import Investigation from "@/views/Investigation.vue";
 import Trial from "@/views/Trial.vue";
 import ClassHour from "@/views/ClassHour.vue";
 import PointsMall from "@/views/tabs/PointsMall.vue";
+import Report from "@/views/Report.vue";
+import Attach from "@/views/Attach.vue";
+import Introduce from "@/views/Introduce.vue";
 
 const routes = [
     {
@@ -95,6 +98,21 @@ const routes = [
         path: '/editprofile',
         name: 'editprofile',
         component: EditProfile
+    },
+    {
+        path: '/report',
+        name: 'report',
+        component: Report
+    },
+    {
+        path: '/attach',
+        name: 'attach',
+        component: Attach
+    },
+    {
+        path: '/introduce',
+        name: 'introduce',
+        component: Introduce
     }
 ];
 
