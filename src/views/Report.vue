@@ -12,32 +12,105 @@
   <!-- 报告内容，在封面页隐藏后显示 -->
   <div v-if="!showCover" class="report-container">
     <div class="report-content">
+      <!-- 报告开场白 -->
       <div class="section-card">
         <div class="section-title">尊敬的林**家长，您好！</div>
-        <div class="section-description">感谢您信任并参与本次数学学习习惯的深度评估。这份报告的目的，不是简单地给孩子打一个分数，而是希望通过科学、客观的数据，与您一同“看见”孩子在数学学习行为上的真实面貌。我们坚信，每一个看似偶然的数学学习结果，背后都有其必然的习惯原因。这份报告将帮助您清晰地了解孩子当前的习惯优势与潜在的提升空间，并为他/她规划一条最有效的数学成长路径。</div>
+        <div class="section-description">
+          这份报告通过科学数据，与您一同“看见”孩子在数学学习行为上的真实面貌。
+          让我们共同探寻根源，为孩子规划最有效的成长路径。
+        </div>
       </div>
 
-      <!-- 新增：核心评估结果 -->
+      <!-- 核心评估结果 -->
       <div class="section-card">
-        <div class="section-title">一、 核心评估结果：三大核心数学分数</div>
-        <div class="section-description">我们从“坚持度”（频率）和“思考力”（深度）两个维度，对林**的13项核心学习习惯进行了评估，结果如下：</div>
+        <div class="section-title">一、核心评估结果：三大核心分数</div>
+        <div class="section-description">我们从“坚持度”（频率）和“思考力”（深度）两大维度进行评估。</div>
 
         <!-- 1. 学习习惯总分 (综合健康度) -->
-        <div class="section-description">1.学习习惯总分 (综合健康度): 35/ 100<br>您孩子的得分区间为：奠基·起步区<br><strong>具体表现：</strong> 孩子在学习上可能感到有些吃力，常常需要家长的督促。他/她可能还没找到适合自己的学习“节拍”，许多有效的学习方法尚未建立。这个阶段最需要的不是施压，而是搭建稳固的“脚手架”。</div>
+        <div class="score-summary-box">
+          <p class="score-title-text">
+            1. 数学学习习惯总分：<span class="score-value">35 / 100分</span>
+          </p>
+          <p class="score-text">
+            <span class="score-label">当前区间：</span>奠基·起步区
+          </p>
+          <div class="core-performance">
+            <p><span class="performance-title">核心表现：</span></p>
+            <ul>
+              <li>学习感受：有些吃力。</li>
+              <li>学习行为：需家长督促。</li>
+              <li>学习方法：尚未建立自己的节奏。</li>
+            </ul>
+          </div>
+          <p class="score-text">
+            <span class="score-label">核心需求：</span>需要搭建稳固的“脚手架”，进行方法引导。
+          </p>
+        </div>
         <div id="chart-health" class="score-chart" style="width: 100%; height: 250px;"></div>
 
         <!-- 2. 数学习惯频率分 (坚持度) -->
-        <div class="section-description">2.数学习惯频率分 (坚持度): 40/ 100<br>您孩子的得分区间为：依赖提醒型<br><strong>具体表现：</strong> 学习的启动和维持，严重依赖家长的“提醒”和“催促”。就像一辆需要不断推动才能前进的车，缺乏内在的动力系统。</div>
+        <div class="score-summary-box">
+          <p class="score-title-text">
+            2. 学习频率分（坚持度）：<span class="score-value">40 / 100分</span>
+          </p>
+          <p class="score-text">
+            <span class="score-label">当前类型：</span>依赖提醒型
+          </p>
+          <div class="core-performance">
+            <p><span class="performance-title">核心表现：</span></p>
+            <ul>
+              <li>启动学习：严重依赖提醒。</li>
+              <li>维持学习：需不断催促。</li>
+            </ul>
+          </div>
+          <p class="score-text">如同缺少内置引擎的车辆，需要持续的外力推动。</p>
+        </div>
         <div id="chart-persistence" class="score-chart" style="width: 100%; height: 250px;"></div>
 
         <!-- 3. 数学深度分 (思考力) -->
-        <div class="section-description">3.数学深度分 (思考力): 33/ 100<br>您孩子的得分区间为：浅层模仿型<br><strong>具体表现：</strong> 学习方式主要是“听话照做”，机械地模仿老师的步骤，但对“为什么这么做”理解不深，知识停留在“记住”而非“理解”的层面。</div>
+        <div class="score-summary-box">
+          <p class="score-title-text">
+            3. 数学深度分（思考力）：<span class="score-value">33 / 100分</span>
+          </p>
+          <p class="score-text">
+            <span class="score-label">当前类型：</span>浅层模仿型
+          </p>
+          <div class="core-performance">
+            <p><span class="performance-title">核心表现：</span></p>
+            <ul>
+              <li>学习方式：“听话照做”。</li>
+              <li>学习习惯：机械模仿，不探究“为什么”。</li>
+              <li>知识掌握：停留在“记住”，而非“理解”。</li>
+            </ul>
+          </div>
+        </div>
         <div id="chart-thinking" class="score-chart" style="width: 100%; height: 250px;"></div>
 
-        <div class="section-description">将“数学频率分”和“数学深度分”结合来看，我们可以更精准地判断孩子的数学学习类型：类型三：低频率 + 低深度 (潜力蓄积型)<br>
-          <strong>深层习惯诊断：</strong> 基于本次评估在学习习惯层面的观察，数据显示孩子在“坚持度”（持续投入的毅力）和“思考力”（深入钻研的习惯）这两个方面，暂时还处在需要外部支持和引导来逐步建立的阶段。这有时会形成一个“因方法不适而回避，因回避而更难入门”的循环。这明确地指向一个需要外部支持的信号，而并非孩子的能力问题。此刻，孩子最需要的不是催促，而是专业的引导和正向的激励，帮助TA找到学习的突破口。<br>
-          <strong>家长常见困惑：</strong> “孩子好像对数学没什么兴趣，也找不到方法，我们说什么都听不进去，感觉很无力。”</div>
-        <!-- 新增：象限图 -->
+        <!-- 深层学习习惯诊断 -->
+        <div class="section-card-alt">
+          <div class="section-title">二、深层学习习惯诊断</div>
+          <p class="diagnosis-text">
+            综合来看，孩子在数学学科的学习类型为：
+            <span class="diagnosis-type">低频率 + 低深度 (信心不足，亟待扶持型)</span>
+          </p>
+          <div class="sub-section">
+            <p class="sub-section-title">当前挑战</p>
+            <ul class="challenge-list">
+              <li>**毅力层面：** 持续投入的习惯还在建立阶段。</li>
+              <li>**思考层面：** 深入钻研的习惯需要逐步培养。</li>
+              <li>**行为表现：** 遇到难题时，有时会因畏难而回避。</li>
+            </ul>
+          </div>
+          <div class="sub-section">
+            <p class="sub-section-title">核心解读</p>
+            <ul class="interpretation-list">
+              <li>这明确指向一个信号：孩子需要外部支持。</li>
+              <li>这并非孩子的能力问题，请您放心。</li>
+              <li>孩子当下最需要的，是专业的引导和正向的激励，帮助他找到学习的突破口。</li>
+            </ul>
+          </div>
+        </div>
+        <!-- 象限图 -->
         <div id="chart-quadrant" class="quadrant-chart" style="width: 100%; height: 400px;"></div>
 
         <div class="link-container">
@@ -45,9 +118,9 @@
         </div>
       </div>
 
-      <!-- 1. 学生成长变化趋势柱状图 -->
+      <!-- 体验课进步展示 -->
       <div class="section-card">
-        <div class="section-title">二、体验课进步展示</div>
+        <div class="section-title">三、体验课进步展示</div>
         <div id="chart-container" style="width: 100%; height: 350px;"></div>
         <div class="link-container">
           <a href="#" @click.prevent="goToAttachPage(2)">点击查看解读和理论依据</a>
@@ -56,26 +129,41 @@
         <div class="link-container">
           <a href="#" @click.prevent="goToAttachPage(3)">点击查看解读和理论依据</a>
         </div>
-        <div class="section-description">孩子的进步非常全面且深入。在理解层面，他实现了巨大飞跃，从最初需要老师引导，到现在已能完全理解“每日三反思”中，每一次反思的不同侧重点，以及“反思三问”的内在逻辑，将知识成功内化。<br>
-          在此基础上，他的掌握也随之深化：反思已不再停留于对“学到了什么”的表层作答，而是真正深入到了结合个人感受的思考与规划之中。尤其在“如何做得更好”这一点上，他已能运用批判性思维，为第二天制定出清晰的改进计划。同时，他的总结输出也变得日益详尽、精准且逻辑性更强，表达能力显著提升，展现了知行合一的强大潜力。</div>
+        <div class="section-description">
+          孩子的进步全面而深入：<br><br>
+          <ul class="progress-list">
+            <li><span class="sub-point">理解层面：</span>从需要引导到完全理解，知识成功内化。</li>
+            <li><span class="sub-point">掌握层面：</span>反思从表层深入到结合个人感受。</li>
+            <li><span class="sub-point">批判性思维：</span>能为第二天制定清晰的改进计划。</li>
+            <li><span class="sub-point">表达能力：</span>总结输出更详尽、精准、有逻辑。</li>
+          </ul>
+        </div>
         <video controls class="report-video">
           <source src="/video.mp4" type="video/mp4">
           您的浏览器不支持视频播放。
         </video>
       </div>
 
+      <!-- 专属课程安排 -->
       <div class="section-card">
-        <div class="section-title">三、专属课程安排</div>
-        <div class="section-description">我们的培养理念：我们坚信，授人以鱼不如授人以渔。我们致力于帮孩子建立一套能受益终身的卓越数学学习习惯。<br>
-          “我们将通过教授一套简单、高效的‘数学学习四步法’，帮他快速入门：”<br>
-          课前： 预习<br>
-          课中： 笔记<br>
-          课后： 及时复习<br>
-          总结： 知识图谱<br>
-          推荐课程：<br>
-          基于以上专业评估，我们为您孩子量身推荐以下数学学习方案，以实现最高效的成长：数学思维与习惯养成·奠基阶段课程课程周期： 4个月<br>
-          核心目标： 激发并增强孩子的学习兴趣和内在驱动力。通过建立数学“预习-笔记-复习-归纳”的高效学习闭环，赋能孩子获得持续的成功体验，让他/她从“被动学习”转变为“主动探索”，最终实现自信心、学习力与成绩的全面提升。</div>
-        <!-- 新增：预期变化柱状图 -->
+        <div class="section-title">四、专属课程安排</div>
+        <div class="section-description">
+          <p><strong>我们的培养理念：</strong>授人以鱼不如授人以渔。我们帮孩子建立一套受益终身的卓越数学学习习惯。</p>
+          <p>我们将通过简单高效的“数学学习四步法”，帮他快速入门：</p>
+          <ul class="learning-steps">
+            <li><strong>课前：</strong>预习</li>
+            <li><strong>课中：</strong>笔记</li>
+            <li><strong>课后：</strong>及时复习</li>
+            <li><strong>总结：</strong>知识图谱</li>
+          </ul>
+          <p><strong>推荐课程：</strong>
+            <span class="course-name">数学思维与习惯养成·奠基阶段课程</span>
+          </p>
+          <p><strong>核心目标：</strong><br>
+            激发并增强孩子的学习兴趣和内在驱动力。通过建立高效学习闭环，让孩子从“被动学习”转变为“主动探索”，实现自信心、学习力与成绩的全面提升。
+          </p>
+        </div>
+        <!-- 预期变化柱状图 -->
         <div id="chart-expected-progress" style="width: 100%; height: 300px;"></div>
       </div>
 
@@ -94,10 +182,9 @@
         </div>
       </div>
 
-      <!-- 3. 课程日历 -->
+      <!-- 课程日历 -->
       <div class="section-card">
         <div class="section-title">课表</div>
-
         <div class="calendar-wrapper">
           <van-calendar
               :poppable="false"
@@ -177,27 +264,29 @@ const chartData = {
 const chartData2 = {
   labels: ['行为习惯', '逻辑思维', '批判性思维', '沟通表达', '持续改进'],
   series: [
-    { name: '体验课-正课', data: [4, 5, 6, 4, 1] },
-    { name: '体验课-精英课1', data: [4, 5, 6, 5, 2] },
-    { name: '体验课-精英课2', data: [4, 5, 7, 6, 3] },
+    {name: '体验课-正课', data: [4, 5, 6, 4, 1]},
+    {name: '体验课-精英课1', data: [4, 5, 6, 5, 2]},
+    {name: '体验课-精英课2', data: [4, 5, 7, 6, 3]},
   ],
 };
 
 const initChart = (id, data) => {
   const chartDom = document.getElementById(id);
   if (chartDom) {
-    if (chartInstances[id]) { chartInstances[id].dispose(); }
+    if (chartInstances[id]) {
+      chartInstances[id].dispose();
+    }
     const myChart = echarts.init(chartDom);
     chartInstances[id] = myChart;
     const option = {
-      tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-      legend: { data: data.series.map(s => s.name), top: 'top' },
+      tooltip: {trigger: 'axis', axisPointer: {type: 'shadow'}},
+      legend: {data: data.series.map(s => s.name), top: 'top'},
       xAxis: {
         type: 'category',
         data: data.labels,
-        axisLabel: { rotate: 60, interval: 0 }
+        axisLabel: {rotate: 60, interval: 0}
       },
-      yAxis: { type: 'value', min: 0, max: 10, interval: 1 },
+      yAxis: {type: 'value', min: 0, max: 10, interval: 1},
       series: data.series.map(s => ({
         name: s.name,
         type: 'bar',
@@ -209,31 +298,51 @@ const initChart = (id, data) => {
   }
 };
 
-const scoreChartData1 = { score: 35, categories: [{ name: '奠基·起步区', scoreRange: [0, 49] }, { name: '形成·潜力区', scoreRange: [50, 69] }, { name: '巩固·优秀区', scoreRange: [70, 89] }, { name: '自动化·学霸区', scoreRange: [90, 100] }] };
-const scoreChartData2 = { score: 40, categories: [{ name: '依赖提醒型', scoreRange: [0, 49] }, { name: '时常波动型', scoreRange: [50, 69] }, { name: '主动坚持型', scoreRange: [70, 89] }, { name: '高度自律型', scoreRange: [90, 100] }] };
-const scoreChartData3 = { score: 33, categories: [{ name: '浅层模仿型', scoreRange: [0, 49] }, { name: '方法摸索型', scoreRange: [50, 69] }, { name: '熟练掌握型', scoreRange: [70, 89] }, { name: '迁移创新型', scoreRange: [90, 100] }] };
+const scoreChartData1 = {
+  score: 35,
+  categories: [{name: '奠基·起步区', scoreRange: [0, 49]}, {
+    name: '形成·潜力区',
+    scoreRange: [50, 69]
+  }, {name: '巩固·优秀区', scoreRange: [70, 89]}, {name: '自动化·学霸区', scoreRange: [90, 100]}]
+};
+const scoreChartData2 = {
+  score: 40,
+  categories: [{name: '依赖提醒型', scoreRange: [0, 49]}, {
+    name: '时常波动型',
+    scoreRange: [50, 69]
+  }, {name: '主动坚持型', scoreRange: [70, 89]}, {name: '高度自律型', scoreRange: [90, 100]}]
+};
+const scoreChartData3 = {
+  score: 33,
+  categories: [{name: '浅层模仿型', scoreRange: [0, 49]}, {
+    name: '方法摸索型',
+    scoreRange: [50, 69]
+  }, {name: '熟练掌握型', scoreRange: [70, 89]}, {name: '迁移创新型', scoreRange: [90, 100]}]
+};
 
 const initScoreChart = (id, data) => {
   const chartDom = document.getElementById(id);
   if (chartDom) {
-    if (chartInstances[id]) { chartInstances[id].dispose(); }
+    if (chartInstances[id]) {
+      chartInstances[id].dispose();
+    }
     const myChart = echarts.init(chartDom);
     chartInstances[id] = myChart;
     const studentCategory = data.categories.find(c => data.score >= c.scoreRange[0] && data.score <= c.scoreRange[1]);
     const option = {
-      tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-      grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
+      tooltip: {trigger: 'axis', axisPointer: {type: 'shadow'}},
+      grid: {left: '3%', right: '4%', bottom: '3%', containLabel: true},
       xAxis: {
         type: 'category',
         data: data.categories.map(c => c.name),
-        axisLabel: { interval: 0, rotate: 0, fontSize: 12 }
+        axisLabel: {interval: 0, rotate: 0, fontSize: 12}
       },
       yAxis: {
         type: 'value',
         name: '分数',
         min: 0,
         max: 100,
-        axisLabel: { formatter: '{value}' }
+        axisLabel: {formatter: '{value}'}
       },
       series: [
         {
@@ -244,7 +353,7 @@ const initScoreChart = (id, data) => {
             const isStudentCategory = c.name === studentCategory.name;
             return {
               value: isStudentCategory ? data.score : c.scoreRange[1] - (c.scoreRange[1] - c.scoreRange[0]) / 2,
-              itemStyle: { color: isStudentCategory ? '#ff0000' : '#d3d3d3' },
+              itemStyle: {color: isStudentCategory ? '#967BB6' : '#d3d3d3'},
               label: {
                 show: isStudentCategory,
                 position: 'top',
@@ -264,12 +373,14 @@ const initScoreChart = (id, data) => {
 const initQuadrantChart = (id, studentFrequency, studentDepth) => {
   const chartDom = document.getElementById(id);
   if (chartDom) {
-    if (chartInstances[id]) { chartInstances[id].dispose(); }
+    if (chartInstances[id]) {
+      chartInstances[id].dispose();
+    }
     const myChart = echarts.init(chartDom);
     chartInstances[id] = myChart;
     const option = {
       tooltip: {
-        formatter: function(params) {
+        formatter: function (params) {
           if (params.seriesName === '学生点位') {
             return `林**同学<br>频率：${params.value[0]}<br>深度：${params.value[1]}`;
           }
@@ -280,10 +391,10 @@ const initQuadrantChart = (id, studentFrequency, studentDepth) => {
         type: 'value',
         min: 0,
         max: 100,
-        axisLabel: { formatter: '{value}', fontSize: 12 },
-        splitLine: { show: false },
-        axisTick: { show: false },
-        axisLine: { lineStyle: { color: '#666' } },
+        axisLabel: {formatter: '{value}', fontSize: 12},
+        splitLine: {show: false},
+        axisTick: {show: false},
+        axisLine: {lineStyle: {color: '#666'}},
         name: '频率（坚持度）',
         nameLocation: 'middle',
         nameGap: 30
@@ -292,10 +403,10 @@ const initQuadrantChart = (id, studentFrequency, studentDepth) => {
         type: 'value',
         min: 0,
         max: 100,
-        axisLabel: { formatter: '{value}', fontSize: 12 },
-        splitLine: { show: false },
-        axisTick: { show: false },
-        axisLine: { lineStyle: { color: '#666' } },
+        axisLabel: {formatter: '{value}', fontSize: 12},
+        splitLine: {show: false},
+        axisTick: {show: false},
+        axisLine: {lineStyle: {color: '#666'}},
         name: '深度（思考力）',
         nameLocation: 'middle',
         nameGap: 30
@@ -306,8 +417,8 @@ const initQuadrantChart = (id, studentFrequency, studentDepth) => {
           type: 'scatter',
           symbolSize: 20,
           data: [[studentFrequency, studentDepth]],
-          itemStyle: { color: '#967BB6' },
-          label: { show: true, position: 'top', formatter: '林**同学' },
+          itemStyle: {color: '#967BB6'},
+          label: {show: true, position: 'top', formatter: '林**同学'},
           z: 2
         },
         {
@@ -316,18 +427,58 @@ const initQuadrantChart = (id, studentFrequency, studentDepth) => {
           markLine: {
             silent: true,
             data: [
-              { xAxis: 50, lineStyle: { color: '#888', type: 'dashed' } },
-              { yAxis: 50, lineStyle: { color: '#888', type: 'dashed' } }
+              {xAxis: 50, lineStyle: {color: '#888', type: 'dashed'}},
+              {yAxis: 50, lineStyle: {color: '#888', type: 'dashed'}}
             ]
           },
           z: 1
         }
       ],
       graphic: [
-        { type: 'text', left: '20%', top: '25%', style: { text: '低频率 + 高深度\n(小聪明，动力不足型)', fill: '#555', font: '10px sans-serif', textAlign: 'center' } },
-        { type: 'text', left: '55%', top: '25%', style: { text: '高频率 + 高深度\n(高度自驱，学霸潜质型)', fill: '#555', font: '10px sans-serif', textAlign: 'center' } },
-        { type: 'text', left: '20%', top: '65%', style: { text: '低频率 + 低深度\n(信心不足，亟待扶持型)', fill: '#555', font: '10px sans-serif', textAlign: 'center' } },
-        { type: 'text', left: '55%', top: '65%', style: { text: '高频率 + 低深度\n(伪勤奋，事倍功半型)', fill: '#555', font: '10px sans-serif', textAlign: 'center' } }
+        {
+          type: 'text',
+          left: '20%',
+          top: '25%',
+          style: {
+            text: '低频率 + 高深度\n(小聪明，动力不足型)',
+            fill: '#555',
+            font: '10px sans-serif',
+            textAlign: 'center'
+          }
+        },
+        {
+          type: 'text',
+          left: '55%',
+          top: '25%',
+          style: {
+            text: '高频率 + 高深度\n(高度自驱，学霸潜质型)',
+            fill: '#555',
+            font: '10px sans-serif',
+            textAlign: 'center'
+          }
+        },
+        {
+          type: 'text',
+          left: '20%',
+          top: '65%',
+          style: {
+            text: '低频率 + 低深度\n(信心不足，亟待扶持型)',
+            fill: '#555',
+            font: '10px sans-serif',
+            textAlign: 'center'
+          }
+        },
+        {
+          type: 'text',
+          left: '55%',
+          top: '65%',
+          style: {
+            text: '高频率 + 低深度\n(伪勤奋，事倍功半型)',
+            fill: '#555',
+            font: '10px sans-serif',
+            textAlign: 'center'
+          }
+        }
       ]
     };
     myChart.setOption(option);
@@ -337,21 +488,23 @@ const initQuadrantChart = (id, studentFrequency, studentDepth) => {
 const progressChartData = {
   labels: ['学习习惯总分', '频率分 (坚持度)', '深度分 (思考力)'],
   series: [
-    { name: '当前评估', data: [35, 40, 33] },
-    { name: '一学期后预期', data: [68, 73, 65] }
+    {name: '当前评估', data: [35, 40, 33]},
+    {name: '一学期后预期', data: [68, 73, 65]}
   ]
 };
 
 const initProgressChart = (id, data) => {
   const chartDom = document.getElementById(id);
   if (chartDom) {
-    if (chartInstances[id]) { chartInstances[id].dispose(); }
+    if (chartInstances[id]) {
+      chartInstances[id].dispose();
+    }
     const myChart = echarts.init(chartDom);
     chartInstances[id] = myChart;
     const option = {
-      tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-      legend: { data: data.series.map(s => s.name), top: 'top', textStyle: { fontSize: 14 } },
-      grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
+      tooltip: {trigger: 'axis', axisPointer: {type: 'shadow'}},
+      legend: {data: data.series.map(s => s.name), top: 'top', textStyle: {fontSize: 14}},
+      grid: {left: '3%', right: '4%', bottom: '3%', containLabel: true},
       xAxis: {
         type: 'category',
         data: data.labels,
@@ -360,7 +513,9 @@ const initProgressChart = (id, data) => {
           rotate: 0,
           fontSize: 14,
           formatter: function (value) {
-            if (value.length > 5) { return value.replace(' ', '\n'); }
+            if (value.length > 5) {
+              return value.replace(' ', '\n');
+            }
             return value;
           }
         }
@@ -370,7 +525,7 @@ const initProgressChart = (id, data) => {
         name: '分数',
         min: 0,
         max: 100,
-        axisLabel: { formatter: '{value}' }
+        axisLabel: {formatter: '{value}'}
       },
       series: data.series.map(s => ({
         name: s.name,
@@ -378,9 +533,9 @@ const initProgressChart = (id, data) => {
         barWidth: '30%',
         data: s.data.map(val => ({
           value: val,
-          label: { show: true, position: 'top', formatter: '{c}', color: '#666' }
+          label: {show: true, position: 'top', formatter: '{c}', color: '#666'}
         })),
-        itemStyle: { color: s.name === '当前评估' ? '#967BB6' : '#6B4A8E' }
+        itemStyle: {color: s.name === '当前评估' ? '#967BB6' : '#6B4A8E'}
       }))
     };
     myChart.setOption(option);
@@ -392,38 +547,38 @@ const maxDate = new Date(2025, 11, 31);
 const defaultDate = new Date(2025, 8, 1);
 
 const courses = [
-  { date: new Date(2025, 8, 2), name: '每日三反思-正课' },
-  { date: new Date(2025, 8, 4), name: '每日三反思-精英课' },
-  { date: new Date(2025, 8, 8), name: '每日三反思-精英课' },
-  { date: new Date(2025, 8, 11), name: '每日三反思-精英课' },
-  { date: new Date(2025, 8, 13), name: '精英课2' },
-  { date: new Date(2025, 8, 18), name: '正课' },
-  { date: new Date(2025, 8, 20), name: '精英课1' },
-  { date: new Date(2025, 8, 22), name: '精英课2' },
-  { date: new Date(2025, 9, 2), name: '每日三反思-正课' },
-  { date: new Date(2025, 9, 4), name: '每日三反思-精英课' },
-  { date: new Date(2025, 9, 8), name: '每日三反思-精英课' },
-  { date: new Date(2025, 9, 11), name: '每日三反思-精英课' },
-  { date: new Date(2025, 9, 13), name: '精英课2' },
-  { date: new Date(2025, 9, 18), name: '正课' },
-  { date: new Date(2025, 9, 20), name: '精英课1' },
-  { date: new Date(2025, 9, 22), name: '精英课2' },
-  { date: new Date(2025, 10, 8), name: '每日三反思-正课' },
-  { date: new Date(2025, 10, 10), name: '每日三反思-精英课' },
-  { date: new Date(2025, 10, 12), name: '每日三反思-精英课' },
-  { date: new Date(2025, 10, 14), name: '每日三反思-精英课' },
-  { date: new Date(2025, 10, 16), name: '精英课2' },
-  { date: new Date(2025, 10, 18), name: '正课' },
-  { date: new Date(2025, 10, 20), name: '精英课1' },
-  { date: new Date(2025, 10, 22), name: '精英课2' },
-  { date: new Date(2025, 11, 8), name: '每日三反思-正课' },
-  { date: new Date(2025, 11, 10), name: '每日三反思-精英课' },
-  { date: new Date(2025, 11, 12), name: '每日三反思-精英课' },
-  { date: new Date(2025, 11, 14), name: '每日三反思-精英课' },
-  { date: new Date(2025, 11, 16), name: '精英课2' },
-  { date: new Date(2025, 11, 18), name: '正课' },
-  { date: new Date(2025, 11, 20), name: '精英课1' },
-  { date: new Date(2025, 11, 22), name: '精英课2' },
+  {date: new Date(2025, 8, 2), name: '每日三反思-正课'},
+  {date: new Date(2025, 8, 4), name: '每日三反思-精英课'},
+  {date: new Date(2025, 8, 8), name: '每日三反思-精英课'},
+  {date: new Date(2025, 8, 11), name: '每日三反思-精英课'},
+  {date: new Date(2025, 8, 13), name: '精英课2'},
+  {date: new Date(2025, 8, 18), name: '正课'},
+  {date: new Date(2025, 8, 20), name: '精英课1'},
+  {date: new Date(2025, 8, 22), name: '精英课2'},
+  {date: new Date(2025, 9, 2), name: '每日三反思-正课'},
+  {date: new Date(2025, 9, 4), name: '每日三反思-精英课'},
+  {date: new Date(2025, 9, 8), name: '每日三反思-精英课'},
+  {date: new Date(2025, 9, 11), name: '每日三反思-精英课'},
+  {date: new Date(2025, 9, 13), name: '精英课2'},
+  {date: new Date(2025, 9, 18), name: '正课'},
+  {date: new Date(2025, 9, 20), name: '精英课1'},
+  {date: new Date(2025, 9, 22), name: '精英课2'},
+  {date: new Date(2025, 10, 8), name: '每日三反思-正课'},
+  {date: new Date(2025, 10, 10), name: '每日三反思-精英课'},
+  {date: new Date(2025, 10, 12), name: '每日三反思-精英课'},
+  {date: new Date(2025, 10, 14), name: '每日三反思-精英课'},
+  {date: new Date(2025, 10, 16), name: '精英课2'},
+  {date: new Date(2025, 10, 18), name: '正课'},
+  {date: new Date(2025, 10, 20), name: '精英课1'},
+  {date: new Date(2025, 10, 22), name: '精英课2'},
+  {date: new Date(2025, 11, 8), name: '每日三反思-正课'},
+  {date: new Date(2025, 11, 10), name: '每日三反思-精英课'},
+  {date: new Date(2025, 11, 12), name: '每日三反思-精英课'},
+  {date: new Date(2025, 11, 14), name: '每日三反思-精英课'},
+  {date: new Date(2025, 11, 16), name: '精英课2'},
+  {date: new Date(2025, 11, 18), name: '正课'},
+  {date: new Date(2025, 11, 20), name: '精英课1'},
+  {date: new Date(2025, 11, 22), name: '精英课2'},
 ];
 
 const courseMap = courses.reduce((acc, curr) => {
@@ -464,23 +619,6 @@ onBeforeUnmount(() => {
   }
 });
 
-// const pullRefreshRef = ref(null);
-// let savedScrollTop = 0;
-//
-//
-// onBeforeRouteLeave(() => {
-//   const vanPullRefreshElement = document.querySelector('.report-container');
-//   if (vanPullRefreshElement) {
-//     savedScrollTop = vanPullRefreshElement.scrollTop;
-//   }
-// });
-//
-// onActivated(() => {
-//   const vanPullRefreshElement = document.querySelector('.report-container');
-//   if (savedScrollTop > 0 && vanPullRefreshElement) {
-//     vanPullRefreshElement.scrollTop = savedScrollTop;
-//   }
-// });
 </script>
 
 <script>
@@ -571,6 +709,155 @@ export default {
   margin-bottom: 1.6rem;
   padding: 1.6rem;
   box-shadow: 0 0.2rem 0.6rem rgba(0, 0, 0, 0.05);
+}
+
+.section-card-alt {
+  background-color: #f0f0f0; /* New background for visual separation */
+  border-radius: 0.8rem;
+  margin-bottom: 1.6rem;
+  padding: 1.6rem;
+  box-shadow: 0 0.2rem 0.6rem rgba(0, 0, 0, 0.05);
+  border-left: 4px solid #967BB6;
+}
+
+.score-summary-box {
+  background-color: #fafafa;
+  border-radius: 0.6rem;
+  padding: 1.2rem;
+  margin-bottom: 1.6rem;
+}
+
+.score-title-text {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.score-value {
+  color: #967BB6;
+}
+
+.score-text {
+  font-size: 1.4rem;
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 0.8rem;
+}
+
+.score-label {
+  font-weight: bold;
+  color: #333;
+}
+
+.core-performance ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin-bottom: 0.8rem;
+}
+
+.core-performance li {
+  font-size: 1.4rem;
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+  position: relative;
+  padding-left: 20px;
+}
+
+.core-performance li::before {
+  content: "•";
+  color: #967BB6;
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
+
+.performance-title {
+  font-weight: bold;
+  color: #333;
+}
+
+.diagnosis-text {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.diagnosis-type {
+  color: #967BB6;
+}
+
+.diagnosis-description {
+  font-size: 1.4rem;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 1.2rem;
+}
+
+.parent-dilemma {
+  background-color: #f7f7f7;
+  border-radius: 0.6rem;
+  padding: 1.2rem;
+}
+
+.parent-dilemma p {
+  font-size: 1.4rem;
+  color: #666;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.dilemma-title {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.sub-point {
+  font-weight: bold;
+  color: #444;
+}
+
+.progress-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 0;
+}
+
+.progress-list li {
+  margin-bottom: 0.8rem;
+}
+
+.learning-steps {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.learning-steps li {
+  font-size: 1.4rem;
+  color: #555;
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+  position: relative;
+  padding-left: 20px;
+}
+
+.learning-steps li::before {
+  content: "▶";
+  color: #967BB6;
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
+
+.course-name {
+  font-weight: bold;
+  color: #967BB6;
 }
 
 .section-title {
@@ -676,5 +963,46 @@ export default {
   font-size: 1.4rem;
   color: #4c66f7;
   text-decoration: none;
+}
+
+.sub-section {
+  background-color: #fafafa;
+  border-radius: 0.6rem;
+  padding: 1.2rem;
+  margin-bottom: 1.6rem;
+}
+
+.sub-section-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.challenge-list,
+.interpretation-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.challenge-list li,
+.interpretation-list li {
+  font-size: 1.4rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+  position: relative;
+  padding-left: 20px;
+}
+
+.challenge-list li::before,
+.interpretation-list li::before {
+  content: "•";
+  color: #967BB6;
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
 }
 </style>
