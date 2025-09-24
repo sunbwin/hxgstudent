@@ -3,7 +3,7 @@
   <div v-if="showCover" :class="{'slide-up-animation': isSliding}" class="cover-page">
     <div class="cover-content">
       <h1 class="cover-title">学生习惯养成总体报告</h1>
-      <p class="cover-text">学生姓名：林晨</p>
+      <p class="cover-text">学生姓名：林**</p>
       <p class="cover-text">报告时间：2025年9月23日</p>
     </div>
     <button class="start-button" @click="startReport">开启报告</button>
@@ -13,14 +13,14 @@
   <div v-if="!showCover" class="report-container">
     <div class="report-content">
       <div class="section-card">
-        <div class="section-title">尊敬的林晨家长，您好！</div>
+        <div class="section-title">尊敬的林**家长，您好！</div>
         <div class="section-description">感谢您信任并参与本次数学学习习惯的深度评估。这份报告的目的，不是简单地给孩子打一个分数，而是希望通过科学、客观的数据，与您一同“看见”孩子在数学学习行为上的真实面貌。我们坚信，每一个看似偶然的数学学习结果，背后都有其必然的习惯原因。这份报告将帮助您清晰地了解孩子当前的习惯优势与潜在的提升空间，并为他/她规划一条最有效的数学成长路径。</div>
       </div>
 
       <!-- 新增：核心评估结果 -->
       <div class="section-card">
         <div class="section-title">一、 核心评估结果：三大核心数学分数</div>
-        <div class="section-description">我们从“坚持度”（频率）和“思考力”（深度）两个维度，对林晨同学的13项核心学习习惯进行了评估，结果如下：</div>
+        <div class="section-description">我们从“坚持度”（频率）和“思考力”（深度）两个维度，对林**的13项核心学习习惯进行了评估，结果如下：</div>
 
         <!-- 1. 学习习惯总分 (综合健康度) -->
         <div class="section-description">1.学习习惯总分 (综合健康度): 35/ 100<br>您孩子的得分区间为：奠基·起步区<br><strong>具体表现：</strong> 孩子在学习上可能感到有些吃力，常常需要家长的督促。他/她可能还没找到适合自己的学习“节拍”，许多有效的学习方法尚未建立。这个阶段最需要的不是施压，而是搭建稳固的“脚手架”。</div>
@@ -271,7 +271,7 @@ const initQuadrantChart = (id, studentFrequency, studentDepth) => {
       tooltip: {
         formatter: function(params) {
           if (params.seriesName === '学生点位') {
-            return `林晨同学<br>频率：${params.value[0]}<br>深度：${params.value[1]}`;
+            return `林**同学<br>频率：${params.value[0]}<br>深度：${params.value[1]}`;
           }
           return null;
         }
@@ -307,7 +307,7 @@ const initQuadrantChart = (id, studentFrequency, studentDepth) => {
           symbolSize: 20,
           data: [[studentFrequency, studentDepth]],
           itemStyle: { color: '#967BB6' },
-          label: { show: true, position: 'top', formatter: '林晨同学' },
+          label: { show: true, position: 'top', formatter: '林**同学' },
           z: 2
         },
         {
