@@ -34,14 +34,14 @@
         <div class="section-description">3.数学深度分 (思考力): 33/ 100<br>您孩子的得分区间为：浅层模仿型<br><strong>具体表现：</strong> 学习方式主要是“听话照做”，机械地模仿老师的步骤，但对“为什么这么做”理解不深，知识停留在“记住”而非“理解”的层面。</div>
         <div id="chart-thinking" class="score-chart" style="width: 100%; height: 250px;"></div>
 
-        <div class="section-description">将“数学频率分”和“数学深度分”结合来看，我们可以更精准地判断孩子的数学学习类型：类型三：低频率 + 低深度 (信心不足，亟待扶持型)<br>
-          <strong>家长常见困惑：</strong> “孩子好像对数学没什么兴趣，也找不到方法，我们说什么都听不进去，感觉很无力。”<br>
-          <strong>深层习惯诊断：</strong> 孩子的“坚持度”（频率分40）和“思考力”（深度分33）都遇到了挑战，很容易陷入“因为学不好，所以不愿学；因为不愿学，所以更学不好”的负向循环。此刻，他最需要的是重建信心和找到有效的突破口。</div>
+        <div class="section-description">将“数学频率分”和“数学深度分”结合来看，我们可以更精准地判断孩子的数学学习类型：类型三：低频率 + 低深度 (潜力蓄积型)<br>
+          <strong>深层习惯诊断：</strong> 基于本次评估在学习习惯层面的观察，数据显示孩子在“坚持度”（持续投入的毅力）和“思考力”（深入钻研的习惯）这两个方面，暂时还处在需要外部支持和引导来逐步建立的阶段。这有时会形成一个“因方法不适而回避，因回避而更难入门”的循环。这明确地指向一个需要外部支持的信号，而并非孩子的能力问题。此刻，孩子最需要的不是催促，而是专业的引导和正向的激励，帮助TA找到学习的突破口。<br>
+          <strong>家长常见困惑：</strong> “孩子好像对数学没什么兴趣，也找不到方法，我们说什么都听不进去，感觉很无力。”</div>
         <!-- 新增：象限图 -->
         <div id="chart-quadrant" class="quadrant-chart" style="width: 100%; height: 400px;"></div>
 
         <div class="link-container">
-          <a href="#" @click.prevent="goToAttachPage()">点击查看解读和理论依据</a>
+          <a href="#" @click.prevent="goToAttachPage(1)">点击查看解读和理论依据</a>
         </div>
       </div>
 
@@ -49,7 +49,15 @@
       <div class="section-card">
         <div class="section-title">二、体验课进步展示</div>
         <div id="chart-container" style="width: 100%; height: 350px;"></div>
+        <div class="link-container">
+          <a href="#" @click.prevent="goToAttachPage(2)">点击查看解读和理论依据</a>
+        </div>
         <div id="chart-container-2" style="width: 100%; height: 350px;"></div>
+        <div class="link-container">
+          <a href="#" @click.prevent="goToAttachPage(3)">点击查看解读和理论依据</a>
+        </div>
+        <div class="section-description">孩子的进步非常全面且深入。在理解层面，他实现了巨大飞跃，从最初需要老师引导，到现在已能完全理解“每日三反思”中，每一次反思的不同侧重点，以及“反思三问”的内在逻辑，将知识成功内化。<br>
+          在此基础上，他的掌握也随之深化：反思已不再停留于对“学到了什么”的表层作答，而是真正深入到了结合个人感受的思考与规划之中。尤其在“如何做得更好”这一点上，他已能运用批判性思维，为第二天制定出清晰的改进计划。同时，他的总结输出也变得日益详尽、精准且逻辑性更强，表达能力显著提升，展现了知行合一的强大潜力。</div>
         <video controls class="report-video">
           <source src="/video.mp4" type="video/mp4">
           您的浏览器不支持视频播放。
@@ -58,7 +66,15 @@
 
       <div class="section-card">
         <div class="section-title">三、专属课程安排</div>
-        <div class="section-description">通过我们为您量身订造的课程安排（授课教练和课表），一学期后您的孩子将实现巨大的成长</div>
+        <div class="section-description">我们的培养理念：我们坚信，授人以鱼不如授人以渔。我们致力于帮孩子建立一套能受益终身的卓越数学学习习惯。<br>
+          “我们将通过教授一套简单、高效的‘数学学习四步法’，帮他快速入门：”<br>
+          课前： 预习<br>
+          课中： 笔记<br>
+          课后： 及时复习<br>
+          总结： 知识图谱<br>
+          推荐课程：<br>
+          基于以上专业评估，我们为您孩子量身推荐以下数学学习方案，以实现最高效的成长：数学思维与习惯养成·奠基阶段课程课程周期： 4个月<br>
+          核心目标： 激发并增强孩子的学习兴趣和内在驱动力。通过建立数学“预习-笔记-复习-归纳”的高效学习闭环，赋能孩子获得持续的成功体验，让他/她从“被动学习”转变为“主动探索”，最终实现自信心、学习力与成绩的全面提升。</div>
         <!-- 新增：预期变化柱状图 -->
         <div id="chart-expected-progress" style="width: 100%; height: 300px;"></div>
       </div>
@@ -81,15 +97,7 @@
       <!-- 3. 课程日历 -->
       <div class="section-card">
         <div class="section-title">课表</div>
-        <div class="section-description">我们的培养理念：我们坚信，授人以鱼不如授人以渔。我们致力于帮孩子建立一套能受益终身的卓越数学学习习惯。<br>
-          “我们将通过教授一套简单、高效的‘数学学习四步法’，帮他快速入门：”<br>
-          课前： 预习<br>
-          课中： 笔记<br>
-          课后： 及时复习<br>
-          总结： 知识图谱<br>
-          推荐课程：<br>
-          基于以上专业评估，我们为您孩子量身推荐以下数学学习方案，以实现最高效的成长：数学思维与习惯养成·奠基阶段课程课程周期： 4个月<br>
-          核心目标： 激发并增强孩子的学习兴趣和内在驱动力。通过建立数学“预习-笔记-复习-归纳”的高效学习闭环，赋能孩子获得持续的成功体验，让他/她从“被动学习”转变为“主动探索”，最终实现自信心、学习力与成绩的全面提升。</div>
+
         <div class="calendar-wrapper">
           <van-calendar
               :poppable="false"
@@ -116,8 +124,8 @@
 </template>
 
 <script setup>
-import {onMounted, ref, watch, nextTick, onBeforeUnmount, defineOptions} from 'vue';
-import { useRouter } from 'vue-router';
+import {onMounted, ref, watch, nextTick, onBeforeUnmount, defineOptions, onActivated} from 'vue';
+import {onBeforeRouteLeave, useRouter} from 'vue-router';
 import { Calendar, showToast } from 'vant';
 import * as echarts from 'echarts';
 
@@ -139,9 +147,12 @@ const startReport = () => {
   }, 500);
 };
 
-const goToAttachPage = () => {
+const goToAttachPage = (param) => {
   router.push({
-    name: 'introduce'
+    name: 'introduce',
+    query: {
+      content: param
+    }
   });
 };
 
@@ -233,7 +244,7 @@ const initScoreChart = (id, data) => {
             const isStudentCategory = c.name === studentCategory.name;
             return {
               value: isStudentCategory ? data.score : c.scoreRange[1] - (c.scoreRange[1] - c.scoreRange[0]) / 2,
-              itemStyle: { color: isStudentCategory ? '#967BB6' : '#d3d3d3' },
+              itemStyle: { color: isStudentCategory ? '#ff0000' : '#d3d3d3' },
               label: {
                 show: isStudentCategory,
                 position: 'top',
@@ -452,6 +463,24 @@ onBeforeUnmount(() => {
     }
   }
 });
+
+// const pullRefreshRef = ref(null);
+// let savedScrollTop = 0;
+//
+//
+// onBeforeRouteLeave(() => {
+//   const vanPullRefreshElement = document.querySelector('.report-container');
+//   if (vanPullRefreshElement) {
+//     savedScrollTop = vanPullRefreshElement.scrollTop;
+//   }
+// });
+//
+// onActivated(() => {
+//   const vanPullRefreshElement = document.querySelector('.report-container');
+//   if (savedScrollTop > 0 && vanPullRefreshElement) {
+//     vanPullRefreshElement.scrollTop = savedScrollTop;
+//   }
+// });
 </script>
 
 <script>
