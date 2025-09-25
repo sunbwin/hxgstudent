@@ -39,7 +39,7 @@
             <ul>
               <li>学习感受：有些吃力。</li>
               <li>学习行为：需家长督促。</li>
-              <li>学习方法：尚未建立自己的节奏。</li>
+              <li>方法：尚未建立自己的节奏。</li>
             </ul>
           </div>
           <p class="score-text">
@@ -59,8 +59,8 @@
           <div class="core-performance">
             <p><span class="performance-title">核心表现：</span></p>
             <ul>
-              <li>启动学习：严重依赖提醒。</li>
-              <li>维持学习：需不断催促。</li>
+              <li>启动：严重依赖提醒。</li>
+              <li>维持：需不断催促。</li>
             </ul>
           </div>
           <p class="score-text">如同缺少内置引擎的车辆，需要持续的外力推动。</p>
@@ -78,8 +78,8 @@
           <div class="core-performance">
             <p><span class="performance-title">核心表现：</span></p>
             <ul>
-              <li>学习方式：“听话照做”。</li>
-              <li>学习习惯：机械模仿，不探究“为什么”。</li>
+              <li>方式：“听话照做”。</li>
+              <li>习惯：机械模仿，不探究“为什么”。</li>
               <li>知识掌握：停留在“记住”，而非“理解”。</li>
             </ul>
           </div>
@@ -163,7 +163,7 @@
             激发并增强孩子的学习兴趣和内在驱动力。通过建立高效学习闭环，让孩子从“被动学习”转变为“主动探索”，实现自信心、学习力与成绩的全面提升。
           </p>
         </div>
-        <!-- 预期变化柱状图 -->
+        <!-- 预期变化折线图 -->
         <div id="chart-expected-progress" style="width: 100%; height: 300px;"></div>
       </div>
 
@@ -243,34 +243,43 @@ const goToAttachPage = (param) => {
   });
 };
 
-const chartData = {
-  labels: ['理解', '掌握'],
+// 新的图表数据，用于展示随时间变化的维度得分
+const chartData1 = {
+  labels: ['体验课-正课', '体验课-精英课1', '体验课-精英课2'],
   series: [
     {
-      name: '体验课-正课',
-      data: [5, 5],
+      name: '理解',
+      data: [5, 7, 9],
     },
     {
-      name: '体验课-精英课1',
-      data: [7, 6],
+      name: '掌握',
+      data: [5, 6, 7],
     },
-    {
-      name: '体验课-精英课2',
-      data: [9, 7],
-    }
   ]
 };
 
 const chartData2 = {
-  labels: ['行为习惯', '逻辑思维', '批判性思维', '沟通表达', '持续改进'],
+  labels: ['体验课-正课', '体验课-精英课1', '体验课-精英课2'],
   series: [
-    {name: '体验课-正课', data: [4, 5, 6, 4, 1]},
-    {name: '体验课-精英课1', data: [4, 5, 6, 5, 2]},
-    {name: '体验课-精英课2', data: [4, 5, 7, 6, 3]},
+    {
+      name: '行为习惯', data: [4, 4, 4]
+    },
+    {
+      name: '逻辑思维', data: [5, 5, 5]
+    },
+    {
+      name: '批判性思维', data: [6, 6, 7]
+    },
+    {
+      name: '沟通表达', data: [4, 5, 6]
+    },
+    {
+      name: '持续改进', data: [1, 2, 3]
+    },
   ],
 };
 
-const initChart = (id, data) => {
+const initLineChart = (id, data, yMax = 10) => {
   const chartDom = document.getElementById(id);
   if (chartDom) {
     if (chartInstances[id]) {
@@ -279,19 +288,45 @@ const initChart = (id, data) => {
     const myChart = echarts.init(chartDom);
     chartInstances[id] = myChart;
     const option = {
-      tooltip: {trigger: 'axis', axisPointer: {type: 'shadow'}},
-      legend: {data: data.series.map(s => s.name), top: 'top'},
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: { type: 'line', lineStyle: { type: 'dashed' } },
+        formatter: (params) => {
+          let tooltipHtml = `${params[0].axisValue}<br>`;
+          params.forEach(item => {
+            tooltipHtml += `<span style="display:inline-block;margin-right:4px;border-radius:10px;width:10px;height:10px;background-color:${item.color};"></span>${item.seriesName}: ${item.value}<br>`;
+          });
+          return tooltipHtml;
+        }
+      },
+      legend: { data: data.series.map(s => s.name), top: 'top', textStyle: { fontSize: 12 } },
+      grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
       xAxis: {
         type: 'category',
         data: data.labels,
-        axisLabel: {rotate: 60, interval: 0}
+        axisLabel: { rotate: 0, interval: 0, fontSize: 12 },
+        axisTick: { show: false },
+        axisLine: { lineStyle: { color: '#ccc' } }
       },
-      yAxis: {type: 'value', min: 0, max: 10, interval: 1},
+      yAxis: {
+        type: 'value',
+        min: 0,
+        max: yMax,
+        interval: 1,
+        axisLabel: { formatter: '{value}', fontSize: 12 },
+        splitLine: { show: true, lineStyle: { type: 'dashed' } },
+        axisLine: { lineStyle: { color: '#ccc' } }
+      },
       series: data.series.map(s => ({
         name: s.name,
-        type: 'bar',
-        barWidth: '20%',
-        data: s.data
+        type: 'line',
+        data: s.data,
+        smooth: true,
+        symbol: 'circle',
+        symbolSize: 8,
+        itemStyle: {
+          borderWidth: 2
+        }
       }))
     };
     myChart.setOption(option);
@@ -486,14 +521,27 @@ const initQuadrantChart = (id, studentFrequency, studentDepth) => {
 };
 
 const progressChartData = {
-  labels: ['学习习惯总分', '频率分 (坚持度)', '深度分 (思考力)'],
+  x: ['当前评估', '一学期后预期'],
   series: [
-    {name: '当前评估', data: [35, 40, 33]},
-    {name: '一学期后预期', data: [68, 73, 65]}
+    {
+      name: '学习习惯总分',
+      data: [35, 68],
+      color: '#967BB6'
+    },
+    {
+      name: '频率分 (坚持度)',
+      data: [40, 73],
+      color: '#B6967B'
+    },
+    {
+      name: '深度分 (思考力)',
+      data: [33, 65],
+      color: '#7B96B6'
+    }
   ]
 };
 
-const initProgressChart = (id, data) => {
+const initExpectedProgressChart = (id, data) => {
   const chartDom = document.getElementById(id);
   if (chartDom) {
     if (chartInstances[id]) {
@@ -502,40 +550,81 @@ const initProgressChart = (id, data) => {
     const myChart = echarts.init(chartDom);
     chartInstances[id] = myChart;
     const option = {
-      tooltip: {trigger: 'axis', axisPointer: {type: 'shadow'}},
-      legend: {data: data.series.map(s => s.name), top: 'top', textStyle: {fontSize: 14}},
-      grid: {left: '3%', right: '4%', bottom: '3%', containLabel: true},
+      tooltip: {
+        trigger: 'axis',
+        formatter: (params) => {
+          let tooltipHtml = `${params[0].axisValue}<br>`;
+          params.forEach(item => {
+            tooltipHtml += `<span style="display:inline-block;margin-right:4px;border-radius:10px;width:10px;height:10px;background-color:${item.color};"></span>${item.seriesName}: ${item.value}<br>`;
+          });
+          return tooltipHtml;
+        }
+      },
+      legend: {
+        bottom: 0,
+        left: 'center',
+        itemGap: 10,
+        textStyle: {
+          fontSize: 12
+        }
+      },
+      grid: {
+        left: '5%',
+        right: '5%',
+        top: '10%',
+        bottom: '15%',
+        containLabel: true
+      },
       xAxis: {
         type: 'category',
-        data: data.labels,
+        boundaryGap: false,
+        data: data.x,
         axisLabel: {
-          interval: 0,
-          rotate: 0,
+          fontWeight: 'bold',
           fontSize: 14,
-          formatter: function (value) {
-            if (value.length > 5) {
-              return value.replace(' ', '\n');
-            }
-            return value;
-          }
-        }
+          padding: [5, 0, 0, 0]
+        },
+        axisTick: {show: false},
+        axisLine: {show: false}
       },
       yAxis: {
         type: 'value',
-        name: '分数',
         min: 0,
-        max: 100,
-        axisLabel: {formatter: '{value}'}
+        max: 80,
+        interval: 10,
+        axisLabel: {
+          fontSize: 12,
+          formatter: (value) => value
+        },
+        splitLine: {
+          lineStyle: {
+            type: 'dashed',
+            color: '#e0e0e0'
+          }
+        }
       },
       series: data.series.map(s => ({
         name: s.name,
-        type: 'bar',
-        barWidth: '30%',
-        data: s.data.map(val => ({
-          value: val,
-          label: {show: true, position: 'top', formatter: '{c}', color: '#666'}
-        })),
-        itemStyle: {color: s.name === '当前评估' ? '#967BB6' : '#6B4A8E'}
+        type: 'line',
+        data: s.data,
+        smooth: true,
+        lineStyle: {
+          width: 3,
+          color: s.color
+        },
+        symbol: 'circle',
+        symbolSize: 8,
+        itemStyle: {
+          color: s.color,
+          borderColor: '#fff',
+          borderWidth: 2
+        },
+        label: {
+          show: false, // 移除点位分数
+          position: 'top',
+          formatter: '{c}',
+          color: '#555'
+        }
       }))
     };
     myChart.setOption(option);
@@ -600,13 +689,13 @@ const onDateSelect = (date) => {
 watch(showCover, (newValue) => {
   if (newValue === false) {
     nextTick(() => {
-      initChart('chart-container', chartData);
-      initChart('chart-container-2', chartData2);
+      initLineChart('chart-container', chartData1, 10);
+      initLineChart('chart-container-2', chartData2, 10);
       initScoreChart('chart-health', scoreChartData1);
       initScoreChart('chart-persistence', scoreChartData2);
       initScoreChart('chart-thinking', scoreChartData3);
       initQuadrantChart('chart-quadrant', 40, 33);
-      initProgressChart('chart-expected-progress', progressChartData);
+      initExpectedProgressChart('chart-expected-progress', progressChartData);
     });
   }
 });
@@ -616,6 +705,21 @@ onBeforeUnmount(() => {
     if (chartInstances[id] && !chartInstances[id].isDisposed()) {
       chartInstances[id].dispose();
     }
+  }
+});
+
+let savedScrollTop = 0;
+onBeforeRouteLeave(() => {
+  const vanPullRefreshElement = document.querySelector('.report-container');
+  if (vanPullRefreshElement) {
+    savedScrollTop = vanPullRefreshElement.scrollTop;
+  }
+});
+
+onActivated(() => {
+  const vanPullRefreshElement = document.querySelector('.report-container');
+  if (savedScrollTop > 0 && vanPullRefreshElement) {
+    vanPullRefreshElement.scrollTop = savedScrollTop;
   }
 });
 
@@ -695,7 +799,11 @@ export default {
 }
 
 .report-container {
-  min-height: 100vh;
+  flex: 1; /* 让内容区占据剩余所有空间 */
+  overflow-y: auto; /* **关键：设置可滚动** */
+  height: 100vh;
+  -webkit-overflow-scrolling: touch;
+  box-sizing: border-box;
   background-color: #f7f8fa;
 }
 
