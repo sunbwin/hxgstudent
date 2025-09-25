@@ -2,6 +2,9 @@
   <!-- 封面页，通过 v-if 控制显示与隐藏 -->
   <div v-if="showCover" :class="{'slide-up-animation': isSliding}" class="cover-page">
     <div class="cover-content">
+      <h1 class="cover-title" style="color: goldenrod">乐培生好习惯让孩子<br>从“要我学”直达“我要学”</h1>
+    </div>
+    <div class="cover-content">
       <h1 class="cover-title">学生习惯养成总体报告</h1>
       <p class="cover-text">学生姓名：林**</p>
       <p class="cover-text">报告时间：2025年9月23日</p>
@@ -13,11 +16,30 @@
   <div v-if="!showCover" class="report-container">
     <div class="report-content">
       <!-- 报告开场白 -->
-      <div class="section-card">
+      <div class="section-card intro-card">
         <div class="section-title">尊敬的林**家长，您好！</div>
         <div class="section-description">
-          这份报告通过科学数据，与您一同“看见”孩子在数学学习行为上的真实面貌。
-          让我们共同探寻根源，为孩子规划最有效的成长路径。
+          这份报告将通过科学数据，与您一同“看见”孩子在学习行为上的真实面貌。但在深入分析具体数据前，我们希望与您分享这份评估报告的底层逻辑——我们用以定义和培养未来拔尖创新人才的“成长引擎”模型。
+        </div>
+        <div class="model-image-container">
+          <img src="/public/model.png" alt="成长引擎模型" class="model-image">
+        </div>
+        <div class="section-description model-description">
+          我们坚信，决定孩子未来高度的，并非仅仅是短期分数，而是其内在的、可不断迭代的综合素养。上图展示的，正是我们提炼出的顶尖人才必备的成长引擎：
+          <ul class="intro-list">
+            <li><strong>引擎内核：</strong> 由“知识储备”、“行为习惯”和“思维品质”构成了一个良性循环。好的行为习惯能高效积累知识，而卓越的思维品质又能指导和优化行为习惯。</li>
+            <li><strong>六大支柱：</strong> 围绕内核，我们识别出逻辑、批判、学习、沟通、持续改进等关键能力。</li>
+          </ul>
+        </div>
+        <div class="section-description">
+          这份报告，就是对您的孩子在这个“成长引擎模型”中所处位置的一次精准诊断。 我们将主要从两大核心维度展开：
+          <ul class="intro-list">
+            <li><strong>“坚持度”（频率）：</strong>直接对应模型中的“行为习惯”维度。</li>
+            <li><strong>“思考力”（深度）：</strong>直接对应模型中的“思维品质”维度。</li>
+          </ul>
+        </div>
+        <div class="section-description">
+          因此，我们接下来为您呈现的，并非孤立的分数，而是您孩子在未来人才必备能力框架下的现状图谱。
         </div>
       </div>
 
@@ -96,9 +118,9 @@
           <div class="sub-section">
             <p class="sub-section-title">当前挑战</p>
             <ul class="challenge-list">
-              <li>**毅力层面：** 持续投入的习惯还在建立阶段。</li>
-              <li>**思考层面：** 深入钻研的习惯需要逐步培养。</li>
-              <li>**行为表现：** 遇到难题时，有时会因畏难而回避。</li>
+              <li>毅力层面：持续投入的习惯还在建立阶段。</li>
+              <li>思考层面：深入钻研的习惯需要逐步培养。</li>
+              <li>行为表现：遇到难题时，有时会因畏难而回避。</li>
             </ul>
           </div>
           <div class="sub-section">
@@ -138,7 +160,7 @@
             <li><span class="sub-point">表达能力：</span>总结输出更详尽、精准、有逻辑。</li>
           </ul>
         </div>
-        <video controls class="report-video">
+        <video controls class="report-video" poster="/video_poster.png" x5-video-player-type="h5">
           <source src="/video.mp4" type="video/mp4">
           您的浏览器不支持视频播放。
         </video>
@@ -417,7 +439,8 @@ const initQuadrantChart = (id, studentFrequency, studentDepth) => {
       tooltip: {
         formatter: function (params) {
           if (params.seriesName === '学生点位') {
-            return `林**同学<br>频率：${params.value[0]}<br>深度：${params.value[1]}`;
+            const pointName = params.dataIndex === 0 ? '当前评估' : '一学期后预期';
+            return `${pointName}<br>频率：${params.value[0]}<br>深度：${params.value[1]}`;
           }
           return null;
         }
@@ -451,9 +474,15 @@ const initQuadrantChart = (id, studentFrequency, studentDepth) => {
           name: '学生点位',
           type: 'scatter',
           symbolSize: 20,
-          data: [[studentFrequency, studentDepth]],
+          data: [[studentFrequency, studentDepth], [75, 70]], // 增加了“一学期后”的点
           itemStyle: {color: '#967BB6'},
-          label: {show: true, position: 'top', formatter: '林**同学'},
+          label: {
+            show: true,
+            position: 'left',
+            formatter: function (params) {
+              return params.dataIndex === 0 ? '林**同学' : '一学期后';
+            },
+          },
           z: 2
         },
         {
@@ -984,6 +1013,9 @@ export default {
 
 .report-video {
   width: 100%;
+  /* 强制视频保持 16:9 的宽高比 */
+  aspect-ratio: 16 / 9;
+  height: auto;
   border-radius: 0.8rem;
 }
 
@@ -1107,6 +1139,54 @@ export default {
 .challenge-list li::before,
 .interpretation-list li::before {
   content: "•";
+  color: #967BB6;
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
+
+/* 新增的样式 */
+.intro-card {
+  padding-top: 0;
+}
+
+.model-image-container {
+  text-align: center;
+  margin: 1.6rem 0;
+}
+
+.model-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.8rem;
+  box-shadow: 0 0.2rem 0.6rem rgba(0, 0, 0, 0.1);
+}
+
+.model-description {
+  margin-top: 1.6rem;
+  font-size: 1.4rem;
+  color: #444;
+}
+
+.intro-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.intro-list li {
+  font-size: 1.4rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 0.8rem;
+  position: relative;
+  padding-left: 20px;
+}
+
+.intro-list li::before {
+  content: "●";
   color: #967BB6;
   font-weight: bold;
   display: inline-block;

@@ -1,213 +1,171 @@
 <template>
   <div class="introduce-container">
-    <!-- contentKey == 1 的内容 -->
     <div v-if="contentKey == '1'" class="introduce-content">
-      <!-- 页面标题 -->
-      <h1 class="page-title">超越分数：开启孩子无限潜能</h1>
-      <p class="subtitle">我们如何通过“学习习惯”与“核心素养”两大支柱，为您的孩子绘制清晰的成长路线图</p>
+      <h1 class="page-title">一个基于学习习惯与核心素养的双支柱发展性评估框架</h1>
+      <p class="subtitle">
+        摘要：传统的教育评估体系在很大程度上聚焦于可量化的知识储备，其评估结果（如分数）在预测个体长期成功方面存在局限性。实证研究，如对诺贝尔奖获得者成长轨迹的回溯分析，揭示了非智力因素，特别是行为习惯与高阶思维品质，在决定个体顶层成就中的关键作用。鉴于此，我们构建了一个超越单一知识维度的双支柱发展性评估框架。该框架旨在通过对“学习习惯”与“核心素养”两大核心构念的系统性评估与干预，为学习者的长远发展提供更具预测效度和指导意义的分析模型与成长路径。
+      </p>
 
-      <!-- 尊敬的家长 -->
+      <!-- 1.0 理论框架：双支柱模型 -->
       <div class="section-card">
-        <p>尊敬的家长：</p>
-        <p>您好！</p>
+        <h2 class="section-title">1.0 理论框架：双支柱模型</h2>
         <p class="paragraph">
-          在当今这个飞速变化的世界，我们深知您和所有家长一样，既为孩子的每一次成绩进步而欣喜，也为未来充满不确定性的挑战而焦虑。我们不禁要问：决定一个孩子未来能否成功的关键，到底是什么？
+          本框架的理论基石是，个体的学业成就与未来潜能，由两大相互关联的核心系统共同决定。
         </p>
-        <p class="paragraph">
-          仅仅是优异的学校成绩吗？
-        </p>
-        <p class="paragraph">
-          有学者曾对诺贝尔奖得主的青少年时代进行了回溯，收集了诸多能够反映他们智商的材料并进行分析。结果发现，这些诺贝尔奖得主并非个个智商极高，他们平均值领先常人并不太多， 但他们的行为习惯特质，尤其是学习、沟通和持续改进能力，远超常人。
-        </p>
-        <p class="paragraph">
-          这告诉我们一个颠扑不破的真理：一个人的成功，是由一个稳固的“<b>核心能力六边形</b>”所决定的。 它包括知识储备、思维品质（逻辑与批判性思维）和行为习惯（学习习惯、沟通能力、持续改进）。
-        </p>
-        <p class="paragraph">
-          学校教育和考试，更多的去解决“知识储备”的积累及评估问题。然而，那两个更深层、更能决定孩子未来发展高度的维度——“<b>行为习惯</b>”和“<b>核心素养</b>”，却常常被忽略。
-        </p>
-        <p class="paragraph">
-          而这，正是我们课程的核心，也是我们为您孩子出具这份分析报告的底层逻辑。我们坚信，通过科学地评估并系统地培养这两大支柱，我们才能真正帮助孩子构建起受益一生的成功基石。
-        </p>
-      </div>
-
-      <!-- 第一支柱：学习习惯 -->
-      <div class="section-card">
-        <h2 class="section-title">第一支柱：学习习惯 —— 驱动孩子自主学习的“强大引擎”</h2>
-        <p class="paragraph">
-          我们首先关注的，不是孩子“学到了什么”，而是他“<b>如何去学</b>”。学习习惯，就是驱动孩子进行一切知识学习的底层“引擎”。一台强劲的引擎，能让孩子在学习的道路上轻松、高效、持久地前行。
-        </p>
-        <p class="paragraph">
-          我们摒弃了“好”或“坏”的简单标签，而是为您孩子精准定位在“学习自主性”的五级成长阶梯上。这不仅是一个评价，更是一条清晰的、可供攀登的成长路径。
-        </p>
-        <ul class="list-disc list-inside space-y-2 mb-6">
-          <li><b>第一级：他律依从者</b> —— 行为依赖外部监督，需要在家长的持续提醒和规则指令下才能完成学习。</li>
-          <li><b>第二级：行为唤醒者</b> —— 能在清晰的规则下尝试独立学习，但过程较为机械，需要偶尔提醒。</li>
-          <li><b>第三级：方法自觉者</b> —— 开始理解学习的目的，能自觉、持续地执行，并有意识地运用基本方法。</li>
-          <li><b>第四级：策略内化者</b> —— 学习已成为稳定的内在模式，能根据不同任务，灵活地选择和调整策略，并进行自我监控。</li>
-          <li><b>第五级：迁移创新者</b> —— 习惯背后的原则已完全内化为个人素养，能将其熟练地迁移到新的学习或生活情境中，并能影响他人。</li>
+        <ul class="list-disc list-inside space-y-2">
+          <li><b>第一支柱：学习习惯</b> 被定义为驱动个体进行知识习得的行为动力系统。它关注学习者“如何学”而非“学到什么”，可被隐喻为学习者的内在“引擎”，决定其学习行为的效率、一致性与持久性。</li>
+          <li><b>第二支柱：核心素养</b> 被定义为支撑个体进行信息加工与问题解决的认知操作系统。它决定了学习者思维的深度、广度与灵活性，是其处理复杂任务、进行创新性工作的底层能力架构。</li>
         </ul>
-        <p class="paragraph">
-          这份报告将告诉您：<b>您的孩子目前正站在哪一级台阶上？他下一步的成长目标是什么？</b>我们的课程，就是为您的孩子设计的专属“教练”，通过精准的训练，帮助他稳步地从一级走向下一级，最终点燃自主学习的强大引擎。
-        </p>
       </div>
 
-      <!-- 第二支柱：核心素养 -->
+      <!-- 2.0 构念一：学习习惯——学习自主性的五阶段发展模型 -->
       <div class="section-card">
-        <h2 class="section-title">第二支柱：核心素养 —— 决定孩子思维深度的“底层操作系统”</h2>
+        <h2 class="section-title">2.0 构念一：学习习惯——学习自主性的五阶段发展模型</h2>
         <p class="paragraph">
-          如果说学习习惯是“引擎”，那么核心素养就是孩子大脑的“<b>底层操作系统</b>”。它决定了孩子如何思考、如何看待世界、如何与人协作、如何面对挫折。一个强大的操作系统，能让孩子处理任何复杂信息都游刃有余。
+          我们将学习习惯的发展，依据其自主性程度，划分为一个由他律向自律演进的五阶段层级模型。该模型旨在对学习者的行为模式进行精准定位，并提供清晰的发展阶梯。
         </p>
+        <ul class="list-disc list-inside space-y-2">
+          <li><b>L1：外部调控阶段 (他律依从者)</b> 学习行为的启动与维持，高度依赖于外部监督、即时指令与既定规则。</li>
+          <li><b>L2：规则唤醒阶段 (行为唤醒者)</b> 在清晰的规则框架下，个体能够展现初步的独立学习行为，但流程较为机械，需要间歇性外部提示以维持状态。</li>
+          <li><b>L3：方法自觉阶段 (方法自觉者)</b> 个体开始内化学习目的，能够自觉、持续地执行学习任务，并有意识地应用基础性学习方法。</li>
+          <li><b>L4：策略内化阶段 (策略内化者)</b> 学习行为已形成稳固的内在驱动模式。个体能依据任务情境，灵活选择并优化策略，并具备初步的自我监控与反思能力。</li>
+          <li><b>L5：迁移创新阶段 (迁移创新者)</b> 学习习惯背后的原则已完全内化为个体素养。个体能将习得的策略与元认知能力，纯熟地迁移至新的、非结构性的任务情境中，并能对他人产生积极影响。</li>
+        </ul>
+      </div>
+
+      <!-- 3.0 构念二：核心素养——思维品质的四维五阶发展矩阵 -->
+      <div class="section-card">
+        <h2 class="section-title">3.0 构念二：核心素养——思维品质的四维五阶发展矩阵</h2>
         <p class="paragraph">
-          我们聚焦于四个关键的核心素养，并同样为您孩子绘制了“思考者”的五阶成长阶梯：
+          核心素养框架聚焦于四个关键维度，并同样构建了五个发展层级，形成一个评估学习者思维深度的发展矩阵。
         </p>
         <div class="table-container">
           <table class="data-table">
             <thead>
             <tr>
-              <th>阶梯</th>
-              <th>1. 逻辑思维<br>(想得清楚)</th>
-              <th>2. 批判性思维<br>(想得明白)</th>
-              <th>3. 沟通能力<br>(说得清楚)</th>
-              <th>4. 持续性改进<br>(变得更好)</th>
+              <th>思维维度<br>(Cognitive Dimensions)</th>
+              <th>L1: 萌芽期<br>(Emergent)</th>
+              <th>L2: 规则执行期<br>(Rule-Based)</th>
+              <th>L3: 独立应用期<br>(Independent)</th>
+              <th>L4: 策略整合期<br>(Strategic)</th>
+              <th>L5: 创新建构期<br>(Innovative)</th>
             </tr>
             </thead>
             <tbody>
             <tr>
-              <td><b>L1: 萌芽的思考者</b></td>
-              <td>能进行单一维度的具象比较</td>
-              <td>能表达个人感受与偏好</td>
-              <td>能用词语或短句回应</td>
-              <td>能在即时反馈下被动修正</td>
+              <td><b>1. 逻辑思维<br>(Logical Thinking)</b></td>
+              <td>进行单一维度的具象比较</td>
+              <td>遵循明确的单步规则</td>
+              <td>独立运用规则解决熟悉问题</td>
+              <td>灵活组合方法解决新异问题</td>
+              <td>识别并修复复杂系统中的逻辑谬误</td>
             </tr>
             <tr>
-              <td><b>L2: 有序的实践者</b></td>
-              <td>能遵循清晰的单步规则</td>
-              <td>能在引导下提出事实问题</td>
-              <td>能用基本完整的句子描述</td>
-              <td>能在提醒下回顾行为</td>
+              <td><b>2. 批判性思维<br>(Critical Thinking)</b></td>
+              <td>表达主观感受与偏好</td>
+              <td>在引导下提出事实性问题</td>
+              <td>有意识地区分事实与观点</td>
+              <td>从多视角评估信息与证据的有效性</td>
+              <td>建构并输出有理有据的原创性见解</td>
             </tr>
             <tr>
-              <td><b>L3: 独立的问题解决者</b></td>
-              <td>能独立运用规则解决熟悉问题</td>
-              <td>能有意识地区分事实与观点</td>
-              <td>能独立、有条理地叙述</td>
-              <td>能主动回顾并归因于单一因素</td>
+              <td><b>3. 沟通能力<br>(Communication)</b></td>
+              <td>运用词语或短句进行回应</td>
+              <td>运用基本完整的句子进行描述</td>
+              <td>进行独立、有条理的叙述</td>
+              <td>运用论据支撑观点，进行结构化表达</td>
+              <td>进行策略性沟通，有效启发或说服他人</td>
             </tr>
             <tr>
-              <td><b>L4: 灵活的策略师</b></td>
-              <td>能灵活组合方法解决新问题</td>
-              <td>能从多角度分析，评估信息</td>
-              <td>能运用论据支撑观点</td>
-              <td>能系统反思并尝试不同策略</td>
-            </tr>
-            <tr>
-              <td><b>L5: 创新的引领者</b></td>
-              <td>能发现并修复逻辑漏洞</td>
-              <td>能建构有理有据的个人见解</td>
-              <td>能策略性沟通并启发他人</td>
-              <td>能设计个性化的改进系统</td>
+              <td><b>4. 持续改进<br>(Continuous Improvement)</b></td>
+              <td>在即时反馈下进行被动修正</td>
+              <td>在外部提醒下回顾自身行为</td>
+              <td>主动回顾并进行单一归因</td>
+              <td>进行系统性反思并尝试多元化策略</td>
+              <td>设计并执行个性化的、前瞻性的改进系统</td>
             </tr>
             </tbody>
           </table>
         </div>
-        <p class="paragraph">
-          我们的课程，将通过一系列精心设计的项目式学习和互动挑战，系统性地提升孩子在这四个维度上的思维深度，为他的大脑安装一套领先于同龄人的“强大操作系统”。
-        </p>
       </div>
 
-      <!-- 结语 -->
+      <!-- 4.0 学习者类型学：基于双支柱模型的四象限分析 -->
       <div class="section-card">
+        <h2 class="section-title">4.0 学习者类型学：基于双支柱模型的四象限分析</h2>
         <p class="paragraph">
-          这份报告，不是一张给孩子下定义的成绩单，而是一份开启孩子无限潜能的“<b>成长地图</b>”。
+          通过将“学习习惯”（频率/坚持度）与“核心素养”（深度/思考力）两个维度进行交叉，我们构建了四种典型的学习者类型画像，用于进行深层诊断与干预指导。
         </p>
-        <p class="paragraph">
-          它为您指明了孩子未来最值得努力的成长方向；它向您展示了，我们的课程是如何科学、精准地帮助您的孩子，一步一个脚印地攀登学习习惯与核心素养的阶梯，最终成长为一个既拥有强大自主学习能力，又具备深度思考能力的未来创新人才。
-        </p>
-        <p class="paragraph">
-          我们诚挚地邀请您，与我们的课程顾问一起，深入解读这份专属于您孩子的成长报告。让我们共同携手，为孩子铺设一条通往未来的、最坚实的成功之路。
-        </p>
-      </div>
-
-      <div class="section-card">
-        <p class="paragraph">
-          类型一：高频率 + 低深度 (伪勤奋，事倍功半型)
-          ●深层习惯诊断：基于本次评估在学习习惯层面的观察，数据显示孩子在行为的‘坚持度’上表现出色，展现了很好的纪律性。当前需要提升的是思考的‘深度’习惯。这种模式的行为特点是：倾向于将‘完成任务’作为首要目标，有时会忽略对知识的深度消化。在当前学段，这种勤奋足以应对大多数情况，但我们需要着眼于未来，如果思考深度的习惯没有同步建立，当学业难度提升时，可能会面临‘事倍功半’的挑战。
-          ●家长常见困惑：家长可能会观察到，孩子在学习上投入了大量时间，任务也都能完成，但有时会觉得孩子在需要深度理解或灵活应用的知识点上，掌握得不够牢固，并对此感到困惑。
-        </p>
-        <p class="paragraph">
-          类型二：低频率 + 高深度 (小聪明，动力不足型)
-          ●深层习惯诊断：基于本次评估在学习习惯层面的观察，我们看到孩子展现了高效的‘思考力’，能快速抓住问题的核心。因此，目前的成长关键在于培养‘坚持度’这一学习习惯，即将这份高效的思考能力稳定地转化为持续的优秀表现。评估数据显示的‘时断时续’的行为模式，会让学习成果变得难以预测。我们需要关注的是，如果学习行为上过多依赖即时的理解而缺少持续、稳定的投入习惯，未来在面对挑战时可能会感到后劲不足。
-        </p>
-        <p class="paragraph">
-          类型三：低频率 + 低深度 (潜力蓄积型)
-          ●深层习惯诊断：基于本次评估在学习习惯层面的观察，数据显示孩子在“坚持度”（持续投入的毅力）和“思考力”（深入钻研的习惯）这两个方面，暂时还处在需要外部支持和引导来逐步建立的阶段。这有时会形成一个“因方法不适而回避，因回避而更难入门”的循环。这明确地指向一个需要外部支持的信号，而并非孩子的能力问题。此刻，孩子最需要的不是催促，而是专业的引导和正向的激励，帮助TA找到学习的突破口。
-        </p>
-        <p class="paragraph">
-          类型四：高频率 + 高深度 (高度自驱，学霸潜质型)
-          ●深层习惯诊断：基于本次评估在学习习惯层面的观察，数据显示孩子已经将‘坚持的毅力’和‘深入的思考力’内化为高效的学习习惯，形成了一个非常健康的自驱模式。这为TA未来的发展奠定了坚实基础。在这一阶段，我们建议的培养重点可以从知识的巩固，转向更高阶的思维训练（如批判性思维、项目式学习）和更广阔的视野拓展，从而支持TA成长为未来的创新者和领航者。
-        </p>
+        <ul class="list-disc list-inside space-y-2">
+          <li><b>类型一：高频率 + 低深度 (高执行-低认知深度型)</b> 诊断分析：该类型学习者的行为模式表现为高度的纪律性与任务执行力，但在认知层面倾向于以“完成”为导向，缺乏对知识的深层加工与概念重构。在低复杂度学段，此模式适应性良好。然而，其核心风险在于，若认知深度未能与行为投入同步发展，在面对复杂度指数级增长的高阶学业时，将出现“勤奋失效”与“边际效用递减”的现象。</li>
+          <li><b>类型二：低频率 + 高深度 (高潜能-低转化型)</b> 诊断分析：该类型学习者展现出高效的认知能力与问题洞察力，但其学习行为的持续性与稳定性不足。其学业产出的不确定性较高，成果表现为“脉冲式”而非“持续性”输出。核心挑战在于将高认知潜能转化为稳定的、可预期的外显成就。若缺少持续性的行为投入，个体在面对需要长期积累与坚韧性的挑战时，可能出现“后劲不足”的问题。</li>
+          <li><b>类型三：低频率 + 低深度 (发展蓄力型)</b> 诊断分析：该类型学习者在行为持续性与认知深度两个维度均处于发展的初级阶段，需要显著的外部支持。常表现为方法论缺失与动机不足的交织，易陷入“因畏难而回避，因回避而加剧能力短板”的负向循环。干预的重点并非施加压力，而是提供精准的“脚手架”支持，包括方法论的引导、正向反馈的建立与内在动机的激发。</li>
+          <li><b>类型四：高频率 + 高深度 (高自驱-整合发展型)</b> 诊断分析：该类型学习者已将行为的坚持性与认知的深刻性成功整合，形成了高效、健康的内在驱动模式，为未来发展奠定了坚实基础。此阶段的发展性干预，应从知识巩固与技能训练，转向更高阶的思维范式培养，如系统性批判思维、跨学科项目式学习与前沿视野拓展，以支持其向创新型与引领型人才发展。</li>
+        </ul>
       </div>
     </div>
 
     <!-- contentKey == 2 的内容 -->
     <div v-else-if="contentKey == '2'" class="introduce-content">
-      <h1 class="page-title">《每日三反思》评估标准</h1>
-      <p class="subtitle">本次评分并非传统意义上的“考试”，而是我们观察孩子在学习新方法时的投入度、吸收效率和适配性的一个重要参考。</p>
+      <h1 class="page-title">《每日三反思》元认知策略效度评估准则</h1>
+      <p class="subtitle">
+        引言：本评估并非对学习者进行终结性评判，而是一项形成性评估工具。其核心目的在于观测学习者在习得一项新的元认知策略（即“每日三反思”）过程中的概念内化效率、程序性应用质量与认知适配性。评估结果将作为后续个性化指导的重要依据。
+      </p>
 
+      <!-- 维度一：概念理解与复述准确度 -->
       <div class="section-card">
-        <h2 class="section-title">维度一：理解 (复述方法的准确性)</h2>
-        <p class="paragraph">
-          <b>考察内容：</b>这个分数主要反映孩子对“每日三反思”这个方法的“知晓”与“理解”程度。也就是说，TA是否能记住并说清楚“是什么”和“怎么做”。
-        </p>
-        <p class="paragraph">
-          <b>分数解读：</b>分数越高，代表孩子对方法论的记忆和理解越清晰、准确。例如，能准确说出三个步骤并用自己的话解释其意义。
-        </p>
+        <h2 class="section-title">维度一：概念理解与复述准确度</h2>
+        <ul class="list-disc list-inside space-y-2">
+          <li><b>评估焦点：</b>本维度旨在评估学习者对于“每日三反思”方法论的陈述性知识掌握水平。核心在于考察其能否准确内化并清晰阐述该方法的构成要素、操作规程与内在逻辑，即回答“是什么”与“如何做”的问题。</li>
+          <li><b>效度释义：</b>分数的高低直接关联学习者对该方法论的认知清晰度与信息编码的准确性。高分表现为：学习者不仅能够结构化地复述其核心步骤，更能运用个人语言对各步骤的功能与目的进行逻辑自洽的释义。</li>
+        </ul>
       </div>
 
+      <!-- 维度二：执行效度与反思质量 -->
       <div class="section-card">
-        <h2 class="section-title">维度二：掌握 (规则流程下的执行深度)</h2>
-        <p class="paragraph">
-          <b>考察内容：</b>这个分数评估的是孩子在实际运用该方法时，所能达到的初步“思考”品质与深度。它衡量的是孩子是否愿意并能够按照流程进行思考，以及思考内容的具体性和深刻性。
-        </p>
-        <p class="paragraph">
-          <b>分数解读：</b>一个较高的分数意味着孩子不仅完成了反思的动作，还能在反思中加入具体的细节、个人感受，甚至进行初步的归因与提炼。例如，从简单的“今天学了语文”，进步到“我学到了如何用‘因为所以’造句”，再到“明天我要改进写字姿势，因为今天写得不端正，手有点酸”。
-        </p>
+        <h2 class="section-title">维度二：执行效度与反思质量</h2>
+        <ul class="list-disc list-inside space-y-2">
+          <li><b>评估焦点：</b>本维度旨在评估学习者在实际应用该方法时的程序性知识转化水平与认知加工深度。它衡量学习者在遵循方法论框架下，所能达到的思维品质与反思内容的深刻性。</li>
+          <li><b>效度释义：</b>高分意味着学习者的反思行为已超越表层的、机械化的流程遵循，进入到深度的认知加工阶段。这体现在其反思内容的演进上，通常表现为三个层次的跃迁：
+            <ul class="list-disc list-inside space-y-2 mt-2">
+              <li><b>描述性反思：</b> 仅对学习事件进行简单陈述（例：“今天学了语文”）。</li>
+              <li><b>分析性反思：</b> 能对学习内容进行具体化提炼与初步归因（例：“我学到了如何用‘因为所以’进行因果关系造句”）。</li>
+              <li><b>批判性与前瞻性反思：</b> 能结合自我评价进行批判性审视，并形成指向未来行动的、具体的改进计划（例：“我识别到今日书写姿势不佳是导致手酸的原因，因此，明日的改进目标是刻意练习正确的握笔与坐姿”）。</li>
+            </ul>
+          </li>
+        </ul>
       </div>
     </div>
 
     <!-- contentKey == 3 的内容 -->
     <div v-else-if="contentKey == '3'" class="introduce-content">
-      <h1 class="page-title">核心素养：思维与习惯的养成</h1>
-      <p class="subtitle">图表中的每一处进步，都代表着孩子在核心素养上的扎实成长。</p>
+      <h1 class="page-title">核心素养的发展性评估：思维范式与行为模式的演进</h1>
+      <p class="subtitle">图表所量化的数据点，表征了学习者在特定核心素养维度上的发展轨迹。每一阶段的增益，均反映其内在认知与行为模式的系统性迁跃。</p>
 
+      <!-- 一、批判性思维 -->
       <div class="section-card">
-        <h2 class="section-title">批判性思维 (Critical Thinking)</h2>
-        <p class="paragraph">
-          <b>它是什么：</b>这不仅仅是“挑错”，而是引导孩子从单纯的“事件罗列”升级为“因果分析”的思考能力。我们鼓励孩子去思考“为什么这件事做得好？”“怎样才能改进？”，从而逐步建立起独立思考、分析问题的思维习惯。
-        </p>
-        <p class="paragraph">
-          <b>图表中的进步：</b>图表中的分数提升，代表着孩子从一开始可能只会简单描述“今天发生了什么”，进步到能够对自己或他人的行为进行初步的分析和提炼，这是思维深度提升的关键一步。
-        </p>
+        <h2 class="section-title">一、批判性思维</h2>
+        <ul class="list-disc list-inside space-y-2">
+          <li><b>构念释义：</b>批判性思维并非指简单的纠错行为，而是个体心智实现从描述性层级（罗列事件）向分析性与评鉴性层级（探究因果）的认知跃迁。我们通过引导性的元认知提问（例如：“该行为的促成因素是什么？”“存在哪些优化路径？”），促使学习者探究事件背后的因果关系，逐步将这种探究内化为一种分析性与反思性的思维范式。</li>
+          <li><b>发展轨迹释义：</b>该维度分数的增益，表征了学习者思维深度的显著发展。其演进路径为：从对事件的表面、线性记述（例如：“今天发生了什么”），发展至能对自我或他者的行为表现进行初步的归因分析与模式提炼。这是个体认知复杂度提升的关键标志。</li>
+        </ul>
       </div>
 
+      <!-- 二、沟通与结构化表达 -->
       <div class="section-card">
-        <h2 class="section-title">沟通表达力 (Communication & Expression)</h2>
-        <p class="paragraph">
-          <b>它是什么：</b>我们关注的不仅是孩子是否愿意说，更是TA能否有条理、有逻辑地将自己的想法清晰地表达出来。“每日三反思”为孩子提供了一个绝佳的每日沟通与表达的练习场景。
-        </p>
-        <p class="paragraph">
-          <b>图表中的进步：</b>您在图表中看到的成长，反映了孩子从简单的词语回应，进步到能够运用更丰富的词汇和完整的句子来描述自己的“所学、所好、所思”。这种表达能力的提升，对未来的学习和社交都至关重要。
-        </p>
+        <h2 class="section-title">二、沟通与结构化表达</h2>
+        <ul class="list-disc list-inside space-y-2">
+          <li><b>构念释义：</b>本项素养的评估焦点，并非仅在于个体的表达意愿，更在于其将内在思想进行外部编码的清晰度、逻辑性与结构性。“每日三反思”为学习者提供了一个常态化的结构性表达训练范式，旨在提升其思想的组织与呈现质量。</li>
+          <li><b>发展轨迹释义：</b>图表中的数据演进，反映了学习者语言能力的质变。其典型路径为：从零散的、单元化的词汇输出，过渡到能够运用更丰富的句法结构，对个人体验（所学、所好、所思）进行连贯、完整的意义建构。该能力是进行高阶学术探究与复杂社会性互动的基础。</li>
+        </ul>
       </div>
 
+      <!-- 三、持续改进 -->
       <div class="section-card">
-        <h2 class="section-title">持续改进 (Continuous Improvement)</h2>
-        <p class="paragraph">
-          <b>它是什么：</b>这是我们课程希望培养的核心习惯之一，即引导孩子建立一种“今天的我比昨天更好”的积极心态。通过反思“待改进”之处，孩子学会的不是自我否定，而是如何将问题转化为具体的、可执行的“下一步行动”。
-        </p>
-        <p class="paragraph">
-          <b>图表中的进步：</b>分数的持续走高，意味着孩子正从需要他人提醒，逐渐转变为愿意主动发现问题，并开始思考“明天我该怎么做才能更好”。这正是培养孩子责任感与自驱力的开端。
-        </p>
+        <h2 class="section-title">三、持续改进</h2>
+        <ul class="list-disc list-inside space-y-2">
+          <li><b>构念释义：</b>此项素养旨在培育学习者的成长型心智模式，建立“今日之我优于昨日之我”的内在信念。其核心机制在于：通过对“改进点”的系统性反思，训练学习者将问题识别转化为前瞻性的、可操作的行为修正方案，从而避免自我否定，建立积极的行动导向。</li>
+          <li><b>发展轨迹释义：</b>该维度的分数爬升，标志着学习者责任归因模式的转变。其发展路径为：从依赖外部归因与被动修正（需要他人提醒），转向内部归因与主动规划（主动识别问题并规划未来行动）。这一转变是学习者个体责任感与内驱力开始形成的实证。</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -215,15 +173,12 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router'; // 导入 useRoute
+import { useRoute } from 'vue-router';
 
 const contentKey = ref('1');
-const route = useRoute(); // 获取路由实例
+const route = useRoute();
 
 onMounted(() => {
-
-
-  // 从路由查询参数中获取 content 值
   const content = route.query.content;
   if (content) {
     contentKey.value = content;
@@ -234,88 +189,135 @@ onMounted(() => {
 <style scoped>
 .introduce-container {
   min-height: 100vh;
-  background-color: #f7f8fa;
+  background-color: #f0f4f8; /* A professional, light blue-gray background */
   display: flex;
   justify-content: center;
-  padding: 1.6rem;
+  padding: 2.4rem 1.6rem;
+  font-family: 'Helvetica Neue', 'Arial', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  color: #333;
 }
 
 .introduce-content {
-  max-width: 800px;
+  max-width: 900px;
   width: 100%;
 }
 
 .page-title {
-  font-size: 2.4rem;
-  font-weight: bold;
+  font-size: 2.8rem;
+  font-weight: 700;
   text-align: center;
   margin-bottom: 0.8rem;
-  color: #333;
+  color: #2c3e50;
+  line-height: 1.3;
 }
 
 .subtitle {
-  font-size: 1.4rem;
-  color: #666;
+  font-size: 1.6rem;
+  color: #555;
   text-align: center;
-  margin-bottom: 2.4rem;
+  margin-bottom: 3.2rem;
+  line-height: 1.6;
 }
 
 .section-card {
   background-color: #fff;
-  border-radius: 0.8rem;
-  margin-bottom: 1.6rem;
-  padding: 1.6rem;
-  box-shadow: 0 0.2rem 0.6rem rgba(0, 0, 0, 0.05);
+  border-radius: 1.2rem;
+  margin-bottom: 2.4rem;
+  padding: 2.4rem;
+  box-shadow: 0 0.8rem 2.4rem rgba(0, 0, 0, 0.08); /* More pronounced shadow for a floating effect */
 }
 
 .section-title {
-  font-size: 1.8rem;
-  font-weight: bold;
+  font-size: 2.2rem;
+  font-weight: 600;
   margin-bottom: 1.6rem;
-  color: #555;
-  border-left: 4px solid #967BB6;
-  padding-left: 0.8rem;
+  color: #34495e;
+  border-left: 5px solid #3498db; /* A professional blue accent */
+  padding-left: 1.2rem;
+  line-height: 1.4;
 }
 
 .paragraph {
-  font-size: 1.4rem;
-  color: #666;
-  line-height: 1.8;
-  margin-bottom: 1.6rem;
+  font-size: 1.5rem;
+  color: #444;
+  line-height: 1.9;
+  margin-bottom: 1.8rem;
   text-align: justify;
 }
 
 .list-disc {
-  padding-left: 1rem;
+  padding-left: 2rem;
+  list-style-type: none; /* Remove default disc */
+}
+
+.list-disc li {
+  position: relative;
+  padding-left: 1.8rem; /* Space for custom bullet */
+  margin-bottom: 1.2rem;
+  line-height: 1.8;
+  font-size: 1.5rem;
+  color: #444;
+}
+
+.list-disc li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #3498db; /* Blue bullet */
+  font-size: 2rem;
+  line-height: 1;
 }
 
 .table-container {
   overflow-x: auto;
-  margin-bottom: 1.6rem;
+  margin-bottom: 2.4rem;
 }
 
 .data-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   color: #555;
 }
 
 .data-table th,
 .data-table td {
   border: 1px solid #ddd;
-  padding: 1rem;
+  padding: 1.4rem;
   text-align: left;
   vertical-align: top;
+  line-height: 1.6;
 }
 
 .data-table th {
-  background-color: #f0f0f0;
+  background-color: #ecf0f1;
   font-weight: bold;
   text-align: center;
+  color: #2c3e50;
 }
 
 .data-table td:first-child {
-  font-weight: bold;
+  font-weight: 600;
+  color: #34495e;
+  background-color: #f9f9f9;
+}
+
+/* Enhancements for better mobile viewing */
+@media (max-width: 768px) {
+  .page-title {
+    font-size: 2.2rem;
+  }
+  .subtitle {
+    font-size: 1.4rem;
+  }
+  .section-title {
+    font-size: 2rem;
+  }
+  .paragraph, .list-disc li {
+    font-size: 1.4rem;
+  }
+  .section-card {
+    padding: 1.6rem;
+  }
 }
 </style>
