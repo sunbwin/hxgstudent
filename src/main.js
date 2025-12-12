@@ -5,7 +5,11 @@ import App from './App.vue'
 import { Lazyload } from 'vant';
 import router from './router'; // 导入我们创建的路由实例
 import '@/utils/rem'; // <-- 引入 rem 适配文件，确保在应用挂载之前执行
+import { AuthHelper } from './utils/auth'
 
+// 应用启动时处理 UID
+AuthHelper.processUidFromUrl()
+AuthHelper.processAgentFromUrl()
 const app = createApp(App);
 app.use(Vant);
 app.use(router); // 挂载 Vue Router

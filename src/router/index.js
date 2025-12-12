@@ -16,13 +16,14 @@ import PointsMall from "@/views/tabs/PointsMall.vue";
 import Report from "@/views/Report.vue";
 import Attach from "@/views/Attach.vue";
 import Introduce from "@/views/Introduce.vue";
+import TrialSignup from "@/views/TrialSignup.vue"
 
 const routes = [
     {
         path: '/',
         name: 'main',
         component: Main,
-        redirect: '/home',
+        redirect: '/plan',
         meta: {
             // 这个 meta.keepAlive 在这里不重要，因为 App.vue 中写死了 include="main"
             title: '主页',
@@ -78,6 +79,11 @@ const routes = [
         path: '/login',
         name: 'login',
         component: Login
+    },
+    {
+        path: '/trialsignup',
+        name: 'TrialSignup',
+        component: TrialSignup
     },
     {
         path: '/investigation',

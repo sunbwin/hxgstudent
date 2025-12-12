@@ -26,7 +26,7 @@ export default defineConfig({
     port: 5175,      // 确保端口正确
     proxy: {
       '/apiv1': {
-        target: 'http://trial.hxg.lpsk12.cn',
+        target: 'http://192.168.1.183:8000',
         changeOrigin: true, // 修改请求头中的 Origin
         rewrite: (path) => path // 不重写路径（保持 /apiv1）
       }

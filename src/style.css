@@ -9,6 +9,13 @@
   color: #000000;
   background-color: #000;
 
+  --primary-green: #8CC63F;       /* 核心草绿色 */
+  --primary-green-dark: #76a835;  /* 深绿色用于点击态 */
+  --text-main: #333333;           /* 主要文字黑 */
+  --text-sub: #666666;            /* 次要文字灰 */
+  --bg-input: #F7F8FA;            /* 输入框浅灰底 */
+  --border-color: #E5E7EB;        /* 边框颜色 */
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

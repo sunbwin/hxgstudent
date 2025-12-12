@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { showToast, showLoadingToast, closeToast } from 'vant'; // 导入 Vant 的 Toast 组件
+import { AuthHelper } from '../utils/auth.js'
 
 // 1. 创建 Axios 实例
 const service = axios.create({
@@ -25,11 +26,13 @@ service.interceptors.request.use(
             });
         }
 
-        // 例如：添加 Token
-        const token = localStorage.getItem('token'); // 假设 Token 存储在 localStorage
-        if (token) {
-            config.headers['Authorization'] = `Bearer ${token}`; // JWT 规范
-        }
+        // 统一在请求参数中注入 openid, agentCode 和 productCode
+        // 这样可以正确处理 GET 请求的参数序列化，避免手动拼接 URL 字符串
+        config.params = config.params || {};
+
+        // 自动添加固定参数
+        config.params.uid = AuthHelper.getUid();
+        config.params.agentCode = AuthHelper.getAgent();
 
         return config;
     },
@@ -51,8 +54,8 @@ service.interceptors.response.use(
         const res = response.data;
 
         // 根据后端返回的 code 或 status 进行判断
-        if (res.code === 200 || res.status === 'success') { // 假设成功状态码是 200 或 'success'
-            return res.data; // 返回真正的数据
+        if (res.code === 0) { // 假设成功状态码是 200 或 'success'
+            return res.obj; // 返回真正的数据
         } else {
             // 统一处理错误
             showToast(res.message || '请求失败，请稍后再试');
