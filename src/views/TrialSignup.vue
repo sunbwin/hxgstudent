@@ -1,5 +1,7 @@
 <template>
   <div class="student-registration-page">
+    <!-- 移除了 GlobalLoading, Toast 和 RequestHandler 组件，依赖 request.js 封装的 Vant Toast/Loading -->
+
     <header class="header-section">
       <!-- 适应 rem 规则，将 max-width 改为 rem 单位 -->
       <img src="/hxg_slogan1.svg" class="slogan-img" alt="要我学变我要学-乐培生好习惯" />
@@ -59,18 +61,68 @@
           <span class="check-icon">✔</span> 报名成功，老师会在一个工作日内联系你
         </p>
       </div>
+
+      <!-- 新增：绑定学生功能区域 -->
+      <div class="bind-section">
+        <span class="bind-text">如果孩子已经报名过体验课，请点击绑定</span>
+        <button @click="showBindDialog = true" class="bind-button">绑定</button>
+      </div>
+      <!-- 结束：绑定学生功能区域 -->
+
     </footer>
+
+    <!-- 自定义 iOS 卡片式弹窗：绑定学生 -->
+    <transition name="van-fade">
+      <div v-if="showBindDialog" class="custom-ios-dialog-overlay">
+        <div class="custom-ios-dialog-card">
+
+          <div class="dialog-content">
+            <!-- 标题区域 (新增) -->
+            <div class="dialog-title">绑定学生</div>
+
+            <!-- 输入区域 -->
+            <div class="custom-input-card">
+              <label for="stuCodeInput" class="input-label">学生编号</label>
+              <input
+                  type="text"
+                  id="stuCodeInput"
+                  v-model="stuCode"
+                  placeholder="请输入学生编号"
+                  maxlength="20"
+                  class="input-control"
+              />
+            </div>
+          </div>
+
+          <!-- 底部操作按钮区域 -->
+          <div class="dialog-actions">
+            <button @click="showBindDialog = false" class="action-button cancel-button">
+              取消
+            </button>
+            <button @click="handleBindConfirm" class="action-button confirm-button">
+              确认
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </transition>
+
   </div>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue';
-import { useRoute } from 'vue-router'; // 引入 useRoute
+import { useRoute, useRouter } from 'vue-router';
+// 引入 Vant 组件
 import { showToast } from 'vant';
-import { submitOrder } from '@/utils/api';
+// 引入 API 函数，包含新增的 bindStudent
+import { submitOrder, bindStudent } from '@/utils/api';
 
 // 1. 获取路由参数
 const route = useRoute();
+const router = useRouter();
+
 const productCode = computed(() => route.query.productCode || 'N/A');
 const productName = computed(() => route.query.productName || '体验课');
 const price = computed(() => Number(route.query.price) || 0);
@@ -83,22 +135,20 @@ const orgiPriceYuan = computed(() => (orgiPrice.value / 100).toFixed(2));
 // --- 页面状态和数据 ---
 const studentName = ref('');
 const phoneNumber = ref('');
-
-// 由于不再查询状态，这里简单模拟已支付状态 (通常用于组件内部演示，实际应由后端接口判断)
 const isPaid = ref(false);
-// 注意：如果该页面需要支持“已报名”状态，则需要再次引入 getPayStatus 并在 onMounted 中调用。
-// 根据您的要求“进入时不需要再调用fetchPayStatus方法查询状态”，我们假设该页面只用于未支付状态的报名。
 
+// 使用 CSS 变量 --primary-green: #8CC63F; 作为主色调
+const primaryGreen = ref('#8CC63F');
+
+// --- 绑定功能状态 ---
+const showBindDialog = ref(false);
+const stuCode = ref('');
 
 const restrictPhoneNumberInput = (event) => {
-  // 限制手机号输入，只允许数字
   let value = event.target.value.replace(/\D/g, '');
-
-  // 限制长度为 11 位
   if (value.length > 11) {
     value = value.substring(0, 11);
   }
-
   phoneNumber.value = value;
 };
 
@@ -109,47 +159,70 @@ const handleSubmit = async () => {
     return;
   }
 
-  // 简单的手机号格式验证
   if (phoneNumber.value.length !== 11) {
     showToast({ message: '请输入11位手机号码！', type: 'fail' });
     return;
   }
 
-
   try {
-    // 3. 提交参数中添加 productCode
     const data = await submitOrder({
       name: studentName.value,
       phone: phoneNumber.value,
-      productCode: productCode.value, // 新增参数
+      productCode: productCode.value,
     });
 
-    debugger
     if (data && data.url) {
-      // 假设后端返回支付链接
       window.location.href = data.url;
     } else {
-      // 如果后端没有返回跳转链接，可以假设订单创建成功，等待异步支付
       showToast({ message: '订单创建成功，请稍候跳转...', type: 'success' });
     }
   } catch (error) {
     console.error('提交订单失败 (业务层)', error);
-    // 错误信息已在 request.js 拦截器中处理并显示 Toast
+  }
+};
+
+/**
+ * 确认绑定学生
+ */
+const handleBindConfirm = async () => {
+  if (!stuCode.value) {
+    showToast({ message: '学生编号不能为空', type: 'fail' });
+    return;
+  }
+
+  try {
+    // 4. 点击确认，调用 api 接口 post 请求 /apiv1/home/bindstu，传入参数 stuCode
+    await bindStudent({ stuCode: stuCode.value });
+
+    showToast({ message: '绑定成功！', type: 'success' });
+
+    // 5. 请求成功后使用 route 覆盖当前页面打开 /plan 路径
+    router.replace('/plan');
+
+  } catch (error) {
+    // 错误处理由 request.js 拦截器处理
+    console.error('绑定学生失败:', error);
+    // 如果失败，阻止弹窗关闭 (保持开启状态)
+    // 注意：由于是自定义弹窗，我们需要手动控制关闭
+  } finally {
+    // 无论成功还是失败，都尝试关闭弹窗
+    showBindDialog.value = false;
   }
 };
 
 </script>
 
 <style scoped>
-/* 保持原有的样式结构和命名，并针对价格显示进行微调 */
+/* 样式变量定义 */
 :root {
-  /* 变量定义保持不变 */
   --primary-green: #8CC63F;
   --primary-green-dark: #76a835;
   --text-main: #333333;
   --text-sub: #666666;
   --bg-input: #F7F8FA;
   --border-color: #E5E7EB;
+  --dialog-border-radius: 1.2rem; /* iOS 风格圆角 */
+  --dialog-action-border: #d6d6d6; /* 按钮分割线颜色 */
 }
 
 /* --- 基础重置 --- */
@@ -169,7 +242,7 @@ const handleSubmit = async () => {
   color: var(--text-main);
 }
 
-/* --- 顶部 Slogan 区域 --- */
+/* --- 顶部 Slogan 区域 (保持不变) --- */
 .header-section {
   width: 100%;
   padding: 3rem 1.6rem 1.6rem;
@@ -186,20 +259,18 @@ const handleSubmit = async () => {
   display: block;
 }
 
-/* --- 主要内容布局 --- */
+/* --- 主要内容布局 (保持不变) --- */
 .main-content {
   flex-grow: 1;
   padding: 1.6rem;
-  padding-bottom: 9rem;
+  padding-bottom: 9rem; /* 确保底部有足够留白 */
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 1.8rem;
-  /* 移除 align-items: center; 以解决边距过大问题，如果需要居中，请取消注释下一行 */
-  /* align-items: center; */
 }
 
-/* --- 白色卡片风格 --- */
+/* --- 白色卡片风格 (保持不变) --- */
 .clean-card {
   background-color: #ffffff;
   border-radius: 1rem;
@@ -207,7 +278,6 @@ const handleSubmit = async () => {
   border: 1px solid #f0f0f0;
   padding: 2rem 1.6rem;
   width: 100%;
-  /* 确保卡片占据全部宽度 */
 }
 
 .card-title {
@@ -220,7 +290,6 @@ const handleSubmit = async () => {
   gap: 0.8rem;
 }
 
-/* 标题左侧的小绿条装饰 */
 .title-decoration {
   display: inline-block;
   width: 4px;
@@ -229,7 +298,7 @@ const handleSubmit = async () => {
   border-radius: 2px;
 }
 
-/* --- 表单样式 --- */
+/* --- 表单样式 (保持不变) --- */
 .form-group {
   margin-bottom: 2.2rem;
 }
@@ -272,7 +341,7 @@ const handleSubmit = async () => {
   cursor: not-allowed;
 }
 
-/* --- 课程介绍特定样式 --- */
+/* --- 课程介绍特定样式 (保持不变) --- */
 .course-subtitle {
   font-size: 1.5rem;
   font-weight: 600;
@@ -281,7 +350,6 @@ const handleSubmit = async () => {
   margin-bottom: 0.8rem;
 }
 
-/* 课程内容高亮框 */
 .highlight-box {
   background-color: rgba(140, 198, 63, 0.08);
   border-radius: 1rem;
@@ -331,9 +399,10 @@ const handleSubmit = async () => {
 .footer-content {
   width: 100%;
   max-width: 30rem;
-  margin: 0 auto;
+  margin: 0 auto 1.5rem; /* 增加底部间距，为绑定区域留出空间 */
 }
 
+/* --- 提交按钮样式 (保持不变) --- */
 .submit-button {
   width: 100%;
   background: linear-gradient(135deg, #9bd44d 0%, #7db631 100%);
@@ -349,12 +418,11 @@ const handleSubmit = async () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.8rem; /* 增加价格之间的间距 */
+  gap: 0.8rem;
 }
 
-/* 价格样式 */
 .price-discount {
-  font-size: 2.0rem; /* 增大折扣价 */
+  font-size: 2.0rem;
   font-weight: 800;
 }
 
@@ -362,19 +430,10 @@ const handleSubmit = async () => {
   font-size: 1.3rem;
   color: rgba(255, 255, 255, 0.7);
   text-decoration: line-through;
-  margin-left: -0.4rem; /* 稍微向左移动，靠近现价 */
+  margin-left: -0.4rem;
 }
 
-
-.submit-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(125, 182, 49, 0.4);
-}
-
-.submit-button:active {
-  transform: scale(0.98);
-}
-
+/* --- 成功消息样式 (保持不变) --- */
 .success-message {
   color: var(--primary-green-dark);
   background-color: #f0fdf4;
@@ -392,5 +451,165 @@ const handleSubmit = async () => {
 
 .check-icon {
   font-size: 1.8rem;
+}
+
+/* --- 新增：绑定学生区域样式 (文本和按钮在同一行) --- */
+.bind-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 30rem;
+  margin: 0 auto;
+  font-size: 1.3rem;
+  color: var(--text-sub);
+}
+
+.bind-text {
+  flex: 1;
+  text-align: left;
+}
+
+.bind-button {
+  background: none;
+  border: none;
+  color: var(--primary-green);
+  font-size: 1.4rem;
+  font-weight: 600;
+  padding: 0.5rem 0.8rem;
+  cursor: pointer;
+}
+
+
+/*==============================================*/
+/* --- 自定义 iOS 风格弹窗样式 --- */
+/*==============================================*/
+
+/* 1. 弹窗背景遮罩 */
+.custom-ios-dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 200; /* 确保在最上层 */
+}
+
+/* 2. 弹窗主体卡片 - 确保圆角 */
+.custom-ios-dialog-card {
+  width: 80%; /* 宽度适中 */
+  max-width: 32rem;
+  background-color: #ffffff;
+  border-radius: var(--dialog-border-radius); /* 确保圆角生效 */
+  overflow: hidden;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* 3. 弹窗内容区域 */
+.dialog-content {
+  padding: 1.8rem 1.6rem 2.0rem; /* 调整底部内边距，给标题和输入框留出空间 */
+}
+
+/* 4. 弹窗标题样式 (新增) */
+.dialog-title {
+  font-size: 1.7rem; /* 标题大小 */
+  font-weight: 600; /* 粗体 */
+  color: var(--text-main);
+  margin-bottom: 1.5rem; /* 底部留出间距 */
+  line-height: 1.2;
+}
+
+
+/* 5. 自定义输入卡片样式 (模拟图片中的输入框) */
+.custom-input-card {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 0.8rem;
+  padding: 1.2rem 1.6rem;
+  /* 移除 margin-bottom，改为由 dialog-content 统一控制 */
+}
+
+.input-label {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--text-main);
+  padding-right: 1.2rem;
+  white-space: nowrap;
+}
+
+.input-control {
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  font-size: 1.6rem;
+  color: var(--text-main);
+  background-color: transparent;
+  padding: 0;
+  /* 调整 placeholder 颜色 */
+  --webkit-input-placeholder: #a0a0a0;
+  --moz-placeholder: #a0a0a0;
+  --ms-input-placeholder: #a0a0a0;
+}
+
+.input-control::placeholder {
+  color: #a0a0a0;
+  font-weight: 400;
+}
+
+
+/* 6. 底部按钮区域 */
+.dialog-actions {
+  display: flex;
+  border-top: 1px solid var(--dialog-action-border); /* 按钮上方水平分割线 */
+}
+
+.action-button {
+  flex: 1;
+  height: 4.8rem;
+  font-size: 1.7rem;
+  font-weight: 500;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: background-color 0.1s;
+}
+
+.action-button:hover:active {
+  background-color: #f7f7f7;
+}
+
+/* 垂直分割线 */
+.action-button:first-child {
+  border-right: 1px solid var(--dialog-action-border);
+}
+
+/* 取消按钮：默认颜色 */
+.cancel-button {
+  color: var(--text-main);
+}
+
+/* 确认按钮：主色调和加粗 */
+.confirm-button {
+  color: var(--primary-green);
+  font-weight: 600;
+}
+
+/* 过渡动画 (使用 Vant 的 fade 效果) */
+.van-fade-enter-active,
+.van-fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.van-fade-enter-from,
+.van-fade-leave-to {
+  opacity: 0;
 }
 </style>

@@ -27,3 +27,40 @@ export function submitOrder(params) {
         params,
     });
 }
+
+/**
+ * 绑定学生编号
+ * @param {object} data - 包含学生编号 { stuCode: string }
+ * @returns {Promise<object>}
+ */
+export function bindStudent(data) {
+    return request({
+        url: '/apiv1/home/bindstu',
+        method: 'post', // POST 请求
+        data,
+    });
+}
+
+/**
+ * 获取用户信息
+ * GET /apiv1/home/userinfo
+ * @returns {Promise<object>} 包含学生信息的对象 { student: { name, gender, grade, ... } }
+ */
+export function getUserInfo() {
+    return request({
+        url: '/apiv1/home/userinfo',
+        method: 'get',
+    });
+}
+
+/**
+ * 获取积分总数
+ * GET /apiv1/home/energy/amount
+ * @returns {Promise<object>} 包含 energy 字段的对象 { energy: number }
+ */
+export function getEnergyAmount() {
+    return request({
+        url: '/apiv1/home/energy/amount',
+        method: 'get',
+    });
+}
